@@ -1,0 +1,60 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8" />
+ <!-- === Micrillion Search Bar === -->
+<div class="micrillion-search" style="margin:16px 0; text-align:center;">
+  <input id="micrillionQuery" type="text" placeholder="Search Micrillion..." 
+         style="padding:8px 12px; border-radius:8px; border:1px solid #ccc; width:60%; max-width:300px;">
+  <button onclick="micrillionSearch()" 
+          style="padding:8px 12px; border-radius:8px; background:#7c3aed; color:#fff; border:0; cursor:pointer;">
+    Search
+  </button>
+</div>
+
+<script>
+  // Redirect search queries back to the Micrillion main page
+  function micrillionSearch() {
+    const q = document.getElementById('micrillionQuery').value.trim();
+    if (q) {
+      // Redirect to Micrillion main page with query parameter
+      window.location.href = `index.html?q=${encodeURIComponent(q)}`;
+    } else {
+      alert('Please enter a search term.');
+    }
+  }
+</script>
+
+  <title>The 3dshop</title>
+  
+  <hr />
+  <li>Gelatinous Land</li>
+  <img src="Pictures2/MessengerPics/Gland.jpg" alt="Gelatinous Land" />
+  <style>
+    .download-btn {
+      background-color: #4CAF50; /* Green */
+      color: white;
+      padding: 12px 24px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .download-btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+<a href="Gelatinous Land.melmap" download>
+  <button class="download-btn">Download</button>
+</a>
+<hr />
+<strong><h1>WIP</h1></strong>
+
+</body>
+</html>

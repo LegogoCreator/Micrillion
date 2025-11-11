@@ -1,0 +1,1024 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- === Micrillion Search Bar === -->
+<div class="micrillion-search" style="margin:16px 0; text-align:center;">
+  <input id="micrillionQuery" type="text" placeholder="Search Micrillion..." 
+         style="padding:8px 12px; border-radius:8px; border:1px solid #ccc; width:60%; max-width:300px;">
+  <button onclick="micrillionSearch()" 
+          style="padding:8px 12px; border-radius:8px; background:#7c3aed; color:#fff; border:0; cursor:pointer;">
+    Search
+  </button>
+</div>
+
+<script>
+  // Redirect search queries back to the Micrillion main page
+  function micrillionSearch() {
+    const q = document.getElementById('micrillionQuery').value.trim();
+    if (q) {
+      // Redirect to Micrillion main page with query parameter
+      window.location.href = `index.html?q=${encodeURIComponent(q)}`;
+    } else {
+      alert('Please enter a search term.');
+    }
+  }
+</script>
+
+    <title>Search Function with Multiple Pages</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .page {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+<head>
+  <title>Text Box Example</title>
+  <style>
+    .text-box {
+      width: 300px;          /* Width of the box */
+      padding: 20px;         /* Space inside the box */
+      border: 2px solid #333;/* Border color & thickness */
+      border-radius: 10px;   /* Rounded corners */
+      background-color: #f0f0f0; /* Background color */
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+<header><img src="https://i.ibb.co/z6hpZBj/Untitled399-20250124165211.png" alt="Legogo" style="width: 100%; max-width: 250px;"></header>
+    <!-- Search bar -->
+    <div>
+        <label for="search">Search for a page: </label>
+        <input type="text" id="search" placeholder="Enter page keyword" oninput="searchPage()">
+    </div>
+
+    <!-- Navigation links -->
+    <nav>
+        <a href="#" onclick="showPage('page1')">Main Page</a> |
+        <a href="#" onclick="showPage('websites')">Websites</a>
+    </nav>
+
+    <hr>
+
+    <!-- Page 1 content -->
+    <div id="page1" class="page active">
+        <h1>Welcome to Legogo!</h1>
+        <p>Legogo is a Multinational American-Filipino Company
+        Made by Ross and Hans as Both CEO's. we, Legogo are
+        Collaborative and has alot of websites/domains.</p>
+        
+        <center><p>we are a parody of google. check the <strong>websites</strong>
+        tab to start exploring!</p></center>
+        
+        <p>Keywords: "start", "first", "begin", "intro", "page1".</p>
+    </div>
+
+    <!-- Page 2 content -->
+    <div id="websites" class="page">
+        <h1>Websites.com</h1>
+        <p>Websites: LegogoArchive.org | Breadland.com | <a href="#" onclick="showPage('SpK')">SpecialKeywords.com</a> | 
+        SmallComparison.org | <a href="#" onclick="showPage('COTC')">ChairoftheCosmos.com</a></p>
+        
+        <p>Keywords: "website", "websites", "website.com", "sites", "internet".</p>
+    </div>
+    
+    <!-- Page 3 content -->
+        <div id="SpK" class="page">
+        <h1>SpecialKeywords.com</h1>
+        <p>This is a list of keywords incase you dont know</p>
+        
+        <p>Keywords: "spk", "keywords", "keyword", "specialkeywords", "specialkeyword".</p>
+    </div>
+    
+     <!-- Page 4 content -->
+        <div id="COTC" class="page">
+        <!-- Chairs of the Cosmos -- HTML fragment (boilerplate omitted as requested)
+     Save this as an .html file or paste into an existing HTML document. -->
+<style>
+  .cotc-wrap{max-width:900px;margin:28px auto;font-family:system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;line-height:1.45;color:#0b1220;background:linear-gradient(180deg,#fbfbff 0%, #f5f8ff 100%);padding:28px;border-radius:14px;box-shadow:0 10px 30px rgba(11,18,32,0.08);}
+  .cotc-header{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+  .cotc-badge{width:72px;height:72px;border-radius:12px;display:grid;place-items:center;font-weight:700;background:linear-gradient(135deg,#2b6df6,#8b5cf6);color:white;box-shadow:0 6px 18px rgba(139,92,246,0.18)}
+  h1{font-size:26px;margin:0}
+  .meta{color:#475569;font-size:13px}
+  .section{margin-top:18px}
+  .rules ol{padding-left:20px}
+  .note{background:#fffbea;padding:10px;border-left:4px solid #ffd166;border-radius:8px;margin-top:10px}
+  .img-wrap{margin-top:16px;text-align:center}
+  .img-wrap img{max-width:100%;border-radius:10px;box-shadow:0 8px 20px rgba(2,6,23,0.06)}
+  .caption{font-size:13px;color:#475569;margin-top:6px}
+  .footer{margin-top:22px;font-size:13px;color:#334155}
+  code.inline{background:#f1f5f9;padding:2px 6px;border-radius:6px;font-family:ui-monospace,Menlo,monospace}
+</style>
+
+<article class="cotc-wrap" role="article" aria-labelledby="cotc-title">
+  <header class="cotc-header">
+    <div class="cotc-badge">COTC</div>
+    <div>
+      <h1 id="cotc-title">Chairs of the Cosmos <small style="font-size:14px;color:#64748b;display:block;margin-top:4px">Acronym: <strong>COTC</strong></small></h1>
+      <div class="meta">Created: Wednesday -- 15 Oct 2025 • 10:30 AM (Philippines time) -- event: Bondoc tossed a folded paper at Ross</div>
+    </div>
+  </header>
+
+  <section class="section" aria-label="About">
+    <h2 style="font-size:18px;margin:0 0 8px">About</h2>
+    <p>In this playful classroom role‑playing game, each <strong>chair</strong> or group of chairs is treated as a fully fledged <strong>planet</strong> and the students are its alien inhabitants. Every object on or under a chair -- books, crumbs, pencils, even <strong>flies and microbes</strong> -- becomes part of that planet's ecosystem. The teacher's desk functions as a <strong>star</strong> or a <strong>black hole</strong>. Players exchange <strong>paper transmissions</strong> (notes) containing questions, dares, drawings, or games to interact across the classroom galaxy.</p>
+  </section>
+
+  <section class="section" aria-label="Goal">
+    <h2 style="font-size:18px;margin:0 0 8px">Goal</h2>
+    <p>Interact with other aliens (students) and their planets using funny, creative paper transmissions. The purpose is not competition but to keep the galaxy alive, chaotic, and hilarious through constant interplanetary communication.</p>
+  </section>
+
+  <section class="section rules" aria-label="Rules">
+    <h2 style="font-size:18px;margin:0 0 8px">Rules</h2>
+    <ol>
+      <li>Every <strong>chair</strong> (or group of chairs) is a <strong>planet</strong>.</li>
+      <li>The person sitting on it is the <strong>King/Almighty</strong> of that planet.</li>
+      <li>Anything on or under your <strong>desk/chair</strong> (books, crumbs, flies, etc.) is part of your planet.</li>
+      <li>The <strong>teacher's desk</strong> is a <strong>star</strong> or <strong>black hole</strong>.
+        <div class="note">A chair becomes a <strong>star</strong> if someone writes <code class="inline">STAR</code> on its desk.</div>
+      </li>
+      <li>Communicate using <strong>paper transmissions</strong> -- write dares, jokes, drawings, or random alien messages and toss them to other planets.</li>
+      <li>You may form <strong>alliances</strong>, trade items, or declare silly wars.</li>
+      <li>Sometimes it's fine to say "classroom," "chair," or "desk" if it fits the joke or improves the fun.</li>
+      <li>Never be boring -- make your planet sound weird, funny, or mysterious.</li>
+      <li>There's no required winner -- the aim is to preserve <strong>galactic classroom chaos</strong>!</li>
+    </ol>
+  </section>
+
+  <section class="section" aria-label="Gameplay">
+    <h2 style="font-size:18px;margin:0 0 8px">How to interact with other aliens</h2>
+    <p>Send a paper transmission (or gently toss a paper) to another planet and let them read it. Transmissions can be questions, dares, drawings, or short games. Players are encouraged to roleplay as their planet's inhabitants and speak as aliens -- not as students -- describing landscapes, cultures, and odd events.</p>
+  </section>
+
+  <section class="section" aria-label="Optional war and winning">
+    <h2 style="font-size:18px;margin:0 0 8px">Victory & conflicts (optional)</h2>
+    <p>Although the game is primarily cooperative and chaotic, an interplanetary war can be declared for fun. If a war eliminates all other planets, the last planet standing is the winner. Military units are playful objects such as origami, toy soldiers, rocks, cardboard shields, and similar harmless props.</p>
+  </section>
+
+  <section class="section" aria-label="Black hole rule">
+    <h2 style="font-size:18px;margin:0 0 8px">Black hole rule</h2>
+    <p>To convert a chair into a black hole, write <code class="inline">BH[amount of black holes in the classroom]</code> on the desk. If the written amount is incorrect, the attempt fails and the chair becomes a <strong>star</strong> instead -- the player must cross out the incorrect <code class="inline">BH[...]</code> and replace it with <code class="inline">STAR</code>.</p>
+  </section>
+
+  <section class="section" aria-label="Origin note">
+    <h2 style="font-size:18px;margin:0 0 8px">Origin note</h2>
+    <p>This version was recorded on <strong>Wednesday, 15 Oct 2025 at ~9:30 AM (Philippines time)</strong> when Bondoc (a classmate) threw an imperfectly folded paper at Ross. The note referenced earlier events and became part of the COTC lore.</p>
+  </section>
+
+  <figure class="img-wrap" aria-label="Gadeseexth Planet image">
+    <img src="https://i.imgur.com/DV1UtuT.jpeg" alt="Gadeseexth Planet collision artwork" />
+    <figcaption class="caption">An image depicting the former Gadeseexth Planet -- a planet in COTC lore that collided and exploded into multiple planets.</figcaption>
+  </figure>
+
+  <footer class="footer">
+    <div><strong>Acronym:</strong> COTC</div>
+    <div style="margin-top:6px;color:#64748b;font-size:13px">Notes: Military toys and props should always be safe and non‑dangerous. Keep the game fun and inclusive.</div>
+  </footer>
+</article>
+        
+        <p>Keywords: "cotc", "ctoc", "chair of the cosmos", "cosmos of the chair", "cosmic chair".</p>
+    </div>
+    
+        <!-- Page 5 content -->
+    <div id="Chitinozoa" class="page">
+        <center><small>Volsconia.com > VolsconianBiota > <strong>Chitinozoa</strong></small></center>
+       
+    <title>Chitinozoa of Volsconia</title>
+    <style>
+        body {
+            font-family: "Georgia", serif;
+            background-color: #f3f0eb;
+            color: #2c2c2c;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #3b3b6d;
+        }
+        figure {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 30px auto;
+            max-width: 600px;
+        }
+        img {
+            width: 100%;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        figcaption {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 8px;
+            text-align: center;
+            font-style: italic;
+        }
+        section {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Chitinozoa of Volsconia</h1>
+
+    <figure>
+        <img src="https://files.geocollections.info/large/4b2d1c90-2264-42d5-bc8d-a7655ff261a4.jpg" alt="Chitinozoan specimen from Volsconia">
+        <figcaption>an image showing a ripped chitinozoan specimen with tentacle-like features</figcaption>
+    </figure>
+
+    <section>
+        <h2>Overview</h2>
+        <p>
+            On the oceanic world of <strong>Volsconia</strong>, microscopic organic capsules known as <em>chitinozoa</em> once floated through the planet's ancient seas.
+            These mysterious organisms are preserved in fossilized form within Volsconian sediment layers dating back over 450 million planetary cycles.
+            Their biological function remains a subject of debate among xenopaleontologists -- some interpret them as the egg cases of early planktonic creatures,
+            while others propose they were independent microorganisms adapted to drifting in the nutrient-rich currents of Volsconia's primordial oceans.
+        </p>
+
+        <h2>Structure and Composition</h2>
+        <p>
+            Each chitinozoan vessel is composed of a chitin-like biopolymer, remarkably resistant to decay.
+            Many specimens display intricate ornamentation, spines, and neck-like extensions suggesting both mechanical and sensory adaptations.
+            The image above shows a damaged specimen, its outer wall torn open to reveal <em>tentacle-like</em> projections that may have been involved in feeding or attachment.
+        </p>
+
+        <h2>Scientific Significance</h2>
+        <p>
+            The distribution of chitinozoan fossils across Volsconia's strata helps researchers reconstruct the planet's ancient environments and climate shifts.
+            Because their morphologies changed rapidly through time, chitinozoa serve as key <strong>biostratigraphic markers</strong>,
+            allowing scientists to date sedimentary layers with remarkable precision.
+        </p>
+
+        <h2>Legacy on Volsconia</h2>
+        <p>
+            Though extinct for eons, chitinozoa remain vital to our understanding of life's early evolution on Volsconia.
+            Their resilience and diversity offer a glimpse into a time when microscopic life dominated the seas,
+            laying the foundation for the complex biospheres that would eventually flourish across the planet.
+        </p>
+    </section>
+
+    <footer>
+        115 AA, Xenobiological Archives of Volsconia
+    </footer>
+
+
+
+        <p>Keywords: "Chitinozoa", "Chitinozoan", "False Graptolites", "Organic Flask", "Flask Fossil".</p>
+    </div>
+    
+        <div id="Dip" class="page">
+ <center><small>Volsconia.com > VolsconianBiota > <strong>Diplakrida</strong></small></center>
+  <title>Diplakrida -- Diplakrid (Volsconia)</title>
+  <style>
+    /* Scoped styling only -- does not change page root background or global theme */
+    .diplakrid-wrap{
+      max-width:900px;
+      margin:32px auto;
+      padding:20px;
+      border-radius:12px;
+      box-shadow:0 6px 24px rgba(0,0,0,0.08);
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(4px);
+      color: #111;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      line-height:1.5;
+    }
+
+    h1{font-size:1.9rem;margin:0 0 6px}
+    h2{font-size:1.1rem;margin-top:18px}
+    p{margin:10px 0}
+    .figure{display:flex;gap:16px;align-items:flex-start}
+    .figure img{max-width:320px;width:40%;height:auto;border-radius:8px;object-fit:cover}
+    .figcaption{font-size:0.9rem;color:#333}
+    ul{margin:8px 0 8px 1.1rem}
+    code{background:#f3f4f6;padding:2px 6px;border-radius:4px;font-family:monospace}
+    .taxobox{border-left:4px solid #5b7; padding:8px 12px;margin:12px 0;background:#fbfffb}
+    .muted{color:#444;font-size:0.95rem}
+    .note{font-size:0.9rem;color:#555;border-top:1px dashed rgba(0,0,0,0.06);padding-top:10px;margin-top:14px}
+    a{color:inherit;text-decoration:underline}
+
+    /* Responsiveness */
+    @media (max-width:640px){
+      .figure{flex-direction:column}
+      .figure img{width:100%}
+    }
+  </style>
+</head>
+<body>
+  <main class="diplakrid-wrap" role="main">
+    <header>
+      <h1>Diplakrida</h1>
+      <p class="muted"><strong>Class</strong> -- Diplakrida &nbsp;•&nbsp; <strong>Phylum</strong> Gademichordata &nbsp;•&nbsp; Native: <em>Volsconia</em></p>
+    </header>
+
+    <section class="figure" aria-labelledby="fig1">
+      <img src="https://scontent.fmnl33-5.fna.fbcdn.net/v/t1.15752-9/550455525_1166460282079632_2359988459338529265_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeGmfifOXXD4C8jpL3ZMDoUz2QeYknzy0CrZB5iSfPLQKif2DYtUX4Vap8gUFnTUbw5Uq9NV5V0qtOTGPf5-1Kvi&_nc_ohc=HQE6qkrl1UsQ7kNvwEs0kDJ&_nc_oc=AdkoO9XoT9oMAzVyE-RBXla241cWYvyu9k27DqxblO2xPEeH6QCB-6Tmdnhg8bgu1FA&_nc_zt=23&_nc_ht=scontent.fmnl33-5.fna&oh=03_Q7cD3gE0jr5sY9zYTACdde-NcjC2s_7jxizFDEBElbqEE20wgQ&oe=691FAB25" alt="Diplakrid specimen"/>
+      <figcaption class="figcaption" id="fig1">
+        <strong>Figure:</strong> a Diplakrid. <br>
+        <span class="muted">Image credit: provided by user link</span>
+      </figcaption>
+    </section>
+
+    <section>
+      <h2>Overview</h2>
+      <p>Diplakrida is a class of colonial, sessile filter-feeders endemic to the moon <em>Volsconia</em>. Members of this class -- called <strong>Diplakrids</strong> -- form branching colonies composed of numerous zooids within chitinous tubes. They share strong morphological and developmental affinities with other Gadeseexthians and a notable resemblance to <em>Rhabdopleurans</em> (historical graptolite relatives).</p>
+
+      <div class="taxobox" aria-hidden="true">
+        <strong>Taxonomic snapshot</strong>
+        <ul>
+          <li><strong>Domain:</strong> Gadeseexthia</li>
+          <li><strong>Phylum:</strong> Gademichordata</li>
+          <li><strong>Class:</strong> Diplakrida</li>
+        </ul>
+      </div>
+
+      <h2>Anatomy &amp; Physiology</h2>
+      <p>Diplakrids are built from repeating zooids arranged along branching stolons. Each zooid bears a <em>lophophore-like feeding crown</em> used to capture suspended particulate food. Internally, they display a dorsal nerve strand and a supportive notochord-like rod -- features shared with other <code>Gademichordates</code>. Their tubes are secreted from anterior glands and reinforced in some species with silicate fibers inherited from agmatan-like ancestry.</p>
+
+      <h2>Genetic affinities</h2>
+      <p>The class shows the following approximate genetic/endophenotypic composition:</p>
+      <ul>
+        <li>~80% shared with other Gadeseexthians</li>
+        <li>~10% similarity to Graptolites/Rhabdopleurans (colony architecture)</li>
+        <li>~5% Agmatan influence (mineralized fiber traits)</li>
+        <li>~2.5% Sea urchin-like deuterostome genes</li>
+        <li>~2.5% Mycoplasmakaryote-derived metabolic gene transfers</li>
+      </ul>
+
+      <h2>Ecology</h2>
+      <p>Colonies typically anchor to rocky substrates or metallic outcrops in shallow seas, creating dense structural habitats. Diplakrids filter large volumes of water and are central to Volsconia's benthic-pelagic nutrient cycling. Some species synchronize bioluminescent pulses for in-colony communication and possible mate attraction.</p>
+
+      <h2>Reproduction &amp; Life Cycle</h2>
+      <p>Diplakrids reproduce asexually by budding to expand colonies and sexually via synchronized gamete release tied to tidal and lunar cues. Planktonic larvae disperse briefly before settling to found new colonies.</p>
+
+      <h2>Significance</h2>
+      <p>Diplakrida exemplifies convergent evolution toward colonial filter-feeding body plans in a Gadeseexthian context, bridging morphological traits seen in extinct graptolites and living hemichordate-like relatives.</p>
+
+ 
+    </section>
+
+    <footer class="muted" style="margin-top:18px">Created: Diplakrida overview • For Volsconia faunal guide</footer>
+  
+
+        <p>Keywords: "Dipl", "Dipla", "Diplak", "Diplakrid", "Diplakrida".</p>
+    </div>
+    
+    <div id="Lphotos" class="page">
+       <center><small><strong>LegogoPhotos.org</strong></small></center>
+       <center><h1>LegogoPhotos</h1></center>
+
+<div class="text-box">List of images (Oct 20 - 30, 2025)
+<img src="https://scontent.fcrk1-3.fna.fbcdn.net/v/t1.15752-9/566383008_2331449663973562_6563471962132610163_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeGV_9CQVabd9zrgrYnx-Gan5W4NOgWsYB7lbg06BaxgHvycp29Ke8jarbbPz3YANiNoeZkwhprD4OWECEBsBCqn&_nc_ohc=IVJj_bYgBI0Q7kNvwGbwS6a&_nc_oc=AdlIj5QBAFU0xPSUm0H2yVX6LpmgCSPOUyDmHdm8hO3Esy_r7zcR8xR05xtjRfr4TVQ&_nc_zt=23&_nc_ht=scontent.fcrk1-3.fna&oh=03_Q7cD3gGyGLv_NmS_mOp6sqI75EoDExV-FmskWH2sLEivHd6elQ&oe=69217876"></img>
+<figcaption class="caption">I dunno.</figcaption>
+
+<img src="https://scontent.fcrk1-4.fna.fbcdn.net/v/t1.15752-9/551330814_845566488148226_8820659209019712586_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeGK6ANVZ818wh3zPs3IBhiulCCuH-a_jWyUIK4f5r-NbLK5yMH1UDezuVvMaFyqu4Ltfx80J5Hcmopj2MQE1ilE&_nc_ohc=4i3IBg2c35YQ7kNvwH8JAh6&_nc_oc=AdmlVIDV8fK-t_wjoQLTDt7wk8MKD6NLtS6EcBz13lr5fQHf4liifJglRCixTmjhY44&_nc_zt=23&_nc_ht=scontent.fcrk1-4.fna&oh=03_Q7cD3gE3mBc8yrVLAVDXoZrqzZgY8m6ArCf9_tiW8kY9krpQpw&oe=692153C0"></img>
+<figcaption class="caption">The Mountain of Hope after the 2025 field trip.</figcaption>
+
+<img src="https://scontent.fcrk1-1.fna.fbcdn.net/v/t1.15752-9/565032635_1079667154058613_3282552826969030419_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeEoHnV2paLd9fHrPnABXpjagYBzN204RkaBgHM3bThGRutVn_csreuAb57Y6rkFuhjPlroUGlfv8lFI7lLhx6FA&_nc_ohc=NTxkHpllKHIQ7kNvwGpOih7&_nc_oc=AdmjlGrYvz4Euy1_sAg6MMkNo0fslkG3hDM3AbMFNKtAIMBbSClN1IOkoVn98bNfcDA&_nc_zt=23&_nc_ht=scontent.fcrk1-1.fna&oh=03_Q7cD3gEFMdINZKGGH-3qC3nfH9B6gccOTfQ8fHpPEptJYfwNdg&oe=69217DA5"></img>
+<figcaption class="caption">absolute cinema 1.0</figcaption>
+
+<img src="https://scontent.fcrk1-5.fna.fbcdn.net/v/t1.15752-9/565898299_1152980803568528_7785842390208527254_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeGcwgDLFHP6aAbLttS2cuH0zOMlTaTQgInM4yVNpNCAif44rvM1yA3N8T1EtLSnTiGzyr91hCSS0aNDEe8Gwjrd&_nc_ohc=QR2hOCu-CmsQ7kNvwF00DyK&_nc_oc=AdkhqhlVL7uznZF_3azecx41t5ahWsos1yFAQdywvWg_z5I6pSdIAWC0sLzYehaMz9I&_nc_zt=23&_nc_ht=scontent.fcrk1-5.fna&oh=03_Q7cD3gFF_JikczB45KfcZjrGlpVRNzTVA8MTrIGOTflMCcztlQ&oe=69217B84"></img>
+<figcaption class="caption">Good boy, ts image pmo</figcaption>
+
+<img src="https://scontent.fcrk1-4.fna.fbcdn.net/v/t1.15752-9/565803559_791968566904226_3055502085159019781_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeF--gRa-FkfqV-ZZzJFNYenIPnX8pAw4s8g-dfykDDiz4KXWcqTKFCcuDwoSMy7qpFrz1BpNBKxp6l1A6WlLUPU&_nc_ohc=c9Z719BHR_UQ7kNvwGntb20&_nc_oc=AdlDabsfbezsjA-pXEHRTvzZGH-B2pPei378BNrrflrqeAdQPvK_v2_D_otvmNLyjRU&_nc_zt=23&_nc_ht=scontent.fcrk1-4.fna&oh=03_Q7cD3gGJVVqFs3cbmkROUV2zZfBwwloBDrgsDI6uEPQtMLoyxA&oe=692159F9"></img>
+<figcaption class="caption">Hornumplings in their normal habitat.</figcaption>
+
+<img src="https://scontent.fcrk1-3.fna.fbcdn.net/v/t1.15752-9/503412455_1346691710488790_2747732447875238590_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeGMLo6wOZzzcXiDa2UML8avsjlTP26x2eayOVM_brHZ5mnE2yXe1H6l-MalCVv1xdmCAVOm5C_3iN6h6aVCOjq4&_nc_ohc=vP6487VD9H0Q7kNvwFBiktI&_nc_oc=Adnu8cOsHO0rG-t9KP3nZQ3A4SP-eqOyJC6SEJjsmWChcqnr-jUylVAXxZySPA8Ejkk&_nc_zt=23&_nc_ht=scontent.fcrk1-3.fna&oh=03_Q7cD3gFzM3Jww3zANMmtLqFlK41werhZFZ2YSWxrhPqdesUTHg&oe=69216C7D"></img>
+<figcaption class="caption">Totosiw's dead cousin (2025-2025)</figcaption>
+</div>
+
+        <p>Keywords: "gallery".</p>
+    </div>
+    
+    <div id="Stimuli" class="page">
+    <center><small><strong>Stimuli.com</strong></small></center>
+    <header><img src="https://scontent.fcrk1-4.fna.fbcdn.net/v/t1.15752-9/565778790_791993386796298_4841575073620265541_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeH2bBYPVXgNPdLtMFbVotRThs1BT2ntDiCGzUFPae0OIA0RyR2258jHqWh5451UPRfarv1kJnA5mqFCQ_k0rpdU&_nc_ohc=FbsJWuiNXh4Q7kNvwGVfuCp&_nc_oc=AdlCrKFqoUXpeGbEB_rKw1a6XdzktMzZwZPKk2MWmQDxM8pXX9huQ5xMolyWVAPiwLE&_nc_zt=23&_nc_ht=scontent.fcrk1-4.fna&oh=03_Q7cD3gH8M3L6q3txdMaFK_U-mEHWHUY7hwm7bHzho2R7AG7P2Q&oe=69216E1E" style="width: 50%; max-width: 250px;"></img> <img src="https://scontent.fcrk1-1.fna.fbcdn.net/v/t1.15752-9/566508993_1211892294107060_783614116459225321_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeEujkJcMJAMv3RU8S-KANFD-GxDlo20bKn4bEOWjbRsqZ-6uQFOjvCdtFSr-jDlCmJRPpRkryHcUqIT1wzn817p&_nc_ohc=w9uj_2ZLRLAQ7kNvwEK-yls&_nc_oc=AdmFjqjOrLlU678GREWWd31QWuNdrL2A3seKSRnJVRJTS6OAcB3Af0N9ORzOMI3hOKg&_nc_zt=23&_nc_ht=scontent.fcrk1-1.fna&oh=03_Q7cD3gG9lq5Xh0QD8JMYo56CTeGG7vuNFlUKapY9TRndXvNNug&oe=69217119" style="width: 50%; max-width: 250px;"></img></header>
+    <div id="assistant-container" style="position:fixed; bottom:20px; right:20px; width:300px; background:#fff; border:1px solid #ccc; padding:10px; border-radius:10px;">
+  <div id="assistant-chat" style="height:200px; overflow:auto; margin-bottom:10px;"></div>
+  <input type="text" id="assistant-input" placeholder="Ask Stimuli..." style="width:100%; padding:5px;"/>
+</div>
+
+<script>
+  const chat = document.getElementById("assistant-chat");
+  const input = document.getElementById("assistant-input");
+
+  input.addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+      const userMsg = input.value.trim();
+      if (!userMsg) return;
+      
+      chat.innerHTML += `<div><strong>You:</strong> ${userMsg}</div>`;
+      input.value = "";
+
+      const msgLower = userMsg.toLowerCase();
+      let response = "idk.";
+
+      // Check for Hello
+      if (msgLower.includes("hello")) {
+        response = "Hello! How can I help you?";
+      }
+
+      // Check for Time
+      else if (msgLower.includes("time")) {
+        response = "Current time is " + new Date().toLocaleTimeString();
+      }
+
+      // Check for Best, Food, Combinations (all three words anywhere)
+      else if (msgLower.includes("best") && msgLower.includes("food") && msgLower.includes("combinations")) {
+        response = "Apple + Clovers, Dutchmil + Cookie, Hotdogs + Milk";
+      }
+
+      // Check for Best, Planet (both words anywhere)
+      else if (msgLower.includes("best") && msgLower.includes("planet")) {
+        response = "your opinion";
+      }
+      
+      else if (msgLower.includes("best") && msgLower.includes("food") && msgLower.includes("combination")) {
+        response = "Apple + Clovers, Dutchmil + Cookie, Hotdogs + Milk";
+      }
+
+      chat.innerHTML += `<div><strong>Stimuli:</strong> ${response}</div>`;
+      chat.scrollTop = chat.scrollHeight; // auto scroll
+    }
+  });
+</script>
+
+    </div>
+    
+    <div id="Laugh" class="page">
+    <!-- Legogo Laughables - TikTok-style GIF feed (v2)
+   Safe for embedding inside Legogo browser HTML.
+   Includes 3 posts with titles and upload dates.
+-->
+<section class="legogo-laughables" aria-label="Legogo Laughables GIF feed">
+  <style>
+    .legogo-laughables { 
+      --width: 420px;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      width: 100%;
+      max-width: var(--width);
+      margin: 0 auto;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      color: inherit;
+    }
+
+    .legogo-header {
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      backdrop-filter: blur(4px);
+      z-index: 10;
+    }
+
+    .legogo-header h1 {
+      font-size: 18px;
+      margin: 0;
+      letter-spacing: .2px;
+    }
+
+    .legogo-feed {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: y mandatory;
+      position: relative;
+    }
+
+    .legogo-post {
+      height: calc(100vh - 56px);
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      scroll-snap-align: center;
+      padding: 12px;
+      box-sizing: border-box;
+      transition: transform .25s ease, filter .25s ease;
+      position: relative;
+    }
+
+    .legogo-post.legogo-focused {
+      transform: scale(1.03);
+      z-index: 5;
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.25));
+    }
+
+    .legogo-gif-wrap {
+      width: 100%;
+      max-width: 360px;
+      aspect-ratio: 9/16;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .legogo-gif-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .legogo-meta {
+      width: 100%;
+      max-width: 360px;
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .legogo-title {
+      font-size: 14px;
+      line-height: 1.1;
+      margin: 0;
+      padding-right: 8px;
+      flex: 1 1 auto;
+      word-break: break-word;
+    }
+
+    .legogo-date {
+      font-size: 11.5px;
+      opacity: 0.7;
+      margin-top: 2px;
+    }
+
+    .legogo-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .legogo-btn {
+      border: none;
+      background: rgba(255,255,255,0.03);
+      padding: 6px 8px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      min-width: 44px;
+    }
+    .legogo-btn:active { transform: translateY(1px); }
+
+    .legogo-btn.legogo-active {
+      background: rgba(0,0,0,0.06);
+      font-weight: 600;
+    }
+
+    .legogo-footer {
+      padding: 8px 12px;
+      font-size: 12px;
+      opacity: 0.9;
+      text-align: center;
+    }
+
+    .legogo-feed:focus { outline: none; }
+  </style>
+
+  <div class="legogo-header">
+    <h1>Legogo laughables</h1>
+    <div style="flex:1"></div>
+    <div style="font-size:13px; opacity:.85">GIFs • Parody</div>
+  </div>
+
+  <main class="legogo-feed" id="legogoFeed" tabindex="0" aria-live="polite">
+
+    <!-- Post 2 -->
+    <article class="legogo-post" data-id="post-2">
+      <div class="legogo-gif-wrap" role="img" aria-label="Typhoon time-lapse">
+        <img src="https://cdn.fbsbx.com/v/t59.2708-21/570888440_585393657969182_3748475628508785337_n.gif?_nc_cat=101&ccb=1-7&_nc_sid=cf94fc&_nc_eui2=AeFIHW63vVR-ZcypqowKqk_mp7kr1hJzJLmnuSvWEnMkuYeOxEfs9coAo7JHkrKTzZsyAR0H6fL7FCrgBO84XpHF&_nc_ohc=xnY51PTqGPsQ7kNvwG_kjHb&_nc_oc=AdkYIzvmN9CMp6jjrZCnJ0oLnFWzNlYwR-V77-rk7pBLZHd_lqOkR9rGLgdmXLeCaBg&_nc_zt=7&_nc_ht=cdn.fbsbx.com&_nc_gid=fFPp16LODvRpoyeAJVF9mA&oh=03_Q7cD3gEqlq0xLiHI4iex9gWavEftDwIsU3s4gWTRnvGcerlT5w&oe=68FCD59D" alt="Typhoon time-lapse GIF" loading="lazy" />
+      </div>
+      <div class="legogo-meta">
+        <div>
+          <h3 class="legogo-title">Typhoon time-lapse</h3>
+          <div class="legogo-date">Uploaded: October 24, 2025 • @Aino</div>
+        </div>
+        <div class="legogo-actions">
+          <button class="legogo-btn legogo-like"><span>👍</span><span class="legogo-count">31</span></button>
+          <button class="legogo-btn legogo-dislike"><span>👎</span><span class="legogo-count">2</span></button>
+        </div>
+      </div>
+    </article>
+
+    <!-- Post 3 -->
+    <article class="legogo-post" data-id="post-3">
+      <div class="legogo-gif-wrap" role="img" aria-label="when I lowkey turn vro into the khaby lame mechanism XD">
+        <img src="https://cdn.fbsbx.com/v/t59.2708-21/566312569_1497015268011231_8269633616004912633_n.gif?_nc_cat=111&ccb=1-7&_nc_sid=cf94fc&_nc_eui2=AeHTM_hY9rHIp6LUPrnuHg25rQoTHL6x_N6tChMcvrH83tvDJwv5VJi728tTOwhcmCMwNw63xmNnheNntRCAtSF8&_nc_ohc=C1rPkNHjct4Q7kNvwFhQ60c&_nc_oc=AdnhHvARBySHoDR4P50UyyNQQ_WDbJyc7DEU6ooaYV5MjIxWr6uk4w2Z9w9zrHCjqbM&_nc_zt=7&_nc_ht=cdn.fbsbx.com&_nc_gid=CViY3q3_-QxnRvZqKUhprA&oh=03_Q7cD3gE9Tm4VCLLGEZR-sTWVP4sGevIo3yTUld71gqRF5pTtjg&oe=68FCEFDE" alt="khaby lame mechanism GIF" loading="lazy" />
+      </div>
+      <div class="legogo-meta">
+        <div>
+          <h3 class="legogo-title">when I lowkey turn vro into the khaby lame mechanism XD</h3>
+          <div class="legogo-date">Uploaded: October 23, 2025 • @Someone6767</div>
+        </div>
+        <div class="legogo-actions">
+          <button class="legogo-btn legogo-like"><span>👍</span><span class="legogo-count">36</span></button>
+          <button class="legogo-btn legogo-dislike"><span>👎</span><span class="legogo-count">23</span></button>
+        </div>
+      </div>
+    </article>
+    
+    <!-- Post 4 -->
+    <article class="legogo-post" data-id="post-3">
+      <div class="legogo-gif-wrap" role="img" aria-label="etcgs ep. 1 pt. 1">
+        <img src="https://cdn.fbsbx.com/v/t59.2708-21/567999640_1834407893949502_809380036673850188_n.gif?_nc_cat=110&ccb=1-7&_nc_sid=cf94fc&_nc_eui2=AeGjImdTpoigTeJj-CJ3utuI7SvfPAzCrcXtK988DMKtxddeK49S_j4d0lgkbrmbF8NY4WPSWCjRrphCDCRoINcQ&_nc_ohc=Vs63G0pdBBMQ7kNvwErjE5-&_nc_oc=Adla-QPWzKjOOFJYh7eB-atQo33UyaSfLTaInKaO7densUnZy7ifLRMszs2IXoxUJ2E&_nc_zt=7&_nc_ht=cdn.fbsbx.com&_nc_gid=lM4SobtykY8Twf2yDGU1rg&oh=03_Q7cD3gEYLZJF9KgK7bkHiwQ6YBFQh5wYQspKMA0YtRBIgJygIA&oe=68FE1322" alt="etcgs1" loading="lazy" />
+      </div>
+      <div class="legogo-meta">
+        <div>
+          <h3 class="legogo-title">Escaping the Chicken Gun Skybox, Ep. 1: The Blackbox, Pt. 1</h3>
+          <div class="legogo-date">Uploaded: October 24, 2025 • @LegogoBoi81</div>
+        </div>
+        <div class="legogo-actions">
+          <button class="legogo-btn legogo-like"><span>👍</span><span class="legogo-count">100</span></button>
+          <button class="legogo-btn legogo-dislike"><span>👎</span><span class="legogo-count">10</span></button>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+  <div class="legogo-footer">Scroll or tap to center a post • Likes saved locally</div>
+
+  <script>
+    (function () {
+      const feed = document.getElementById('legogoFeed');
+      const posts = Array.from(feed.querySelectorAll('.legogo-post'));
+
+      function getSaved(key, fallback) {
+        try { return JSON.parse(localStorage.getItem(key)) || fallback; } catch { return fallback; }
+      }
+      function save(key, value) {
+        try { localStorage.setItem(key, JSON.stringify(value)); } catch {}
+      }
+
+      posts.forEach(post => {
+        const id = post.dataset.id;
+        const likeBtn = post.querySelector('.legogo-like');
+        const dislikeBtn = post.querySelector('.legogo-dislike');
+        const likeCount = likeBtn.querySelector('.legogo-count');
+        const dislikeCount = dislikeBtn.querySelector('.legogo-count');
+        const data = getSaved('legogo:' + id, { likes: 0, dislikes: 0, liked: false, disliked: false });
+
+        function update() {
+          likeCount.textContent = data.likes;
+          dislikeCount.textContent = data.dislikes;
+          likeBtn.classList.toggle('legogo-active', data.liked);
+          dislikeBtn.classList.toggle('legogo-active', data.disliked);
+        }
+        update();
+
+        likeBtn.onclick = () => {
+          if (data.liked) { data.liked = false; data.likes--; }
+          else { data.liked = true; data.likes++; if (data.disliked) { data.disliked = false; data.dislikes--; } }
+          save('legogo:' + id, data); update();
+        };
+
+        dislikeBtn.onclick = () => {
+          if (data.disliked) { data.disliked = false; data.dislikes--; }
+          else { data.disliked = true; data.dislikes++; if (data.liked) { data.liked = false; data.likes--; } }
+          save('legogo:' + id, data); update();
+        };
+
+        post.onclick = (e) => {
+          if (!e.target.closest('.legogo-btn')) post.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        };
+      });
+
+      // Focus detection
+      const io = new IntersectionObserver(entries => {
+        let top = null, ratio = 0;
+        for (const e of entries) if (e.intersectionRatio > ratio) { top = e.target; ratio = e.intersectionRatio; }
+        posts.forEach(p => p.classList.toggle('legogo-focused', p === top));
+      }, { root: feed, threshold: [0.5, 0.9] });
+      posts.forEach(p => io.observe(p));
+
+      // Start centered
+      setTimeout(() => posts[0]?.scrollIntoView({ block: 'center' }), 60);
+    })();
+  </script>
+</section>
+
+    </div>
+    
+    <div id="IkawNga" class="page">
+    
+  <style>
+    /* Scoped styles only for #youtube so global theme/background won't change */
+    #youtube { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; padding: 18px; box-sizing: border-box; color: inherit; }
+    #youtube .layout { display:flex; gap:20px; align-items:flex-start; max-width:980px; margin: 0 auto; }
+    #youtube .main { flex:1 1 640px; }
+    #youtube .player { background: rgba(0,0,0,0.04); padding:10px; border-radius:10px; display:inline-block; }
+    #youtube video { display:block; border-radius:6px; background:#000; }
+    #youtube .meta { margin-top:8px; }
+    #youtube .title { font-weight:700; font-size:16px; margin-bottom:6px; }
+    #youtube .sub { font-size:12px; color:gray; margin-bottom:8px; }
+    #youtube .controls { display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap; }
+    #youtube button { background:transparent; border:1px solid rgba(0,0,0,0.08); padding:6px 10px; border-radius:8px; cursor:pointer; font-size:13px; }
+    #youtube .playlist { display:flex; flex-direction:column; gap:10px; }
+    #youtube .clip { display:flex; gap:8px; align-items:center; cursor:pointer; padding:6px; border-radius:8px; }
+    #youtube .clip:hover { background: rgba(0,0,0,0.03); }
+    #youtube .thumb { width:96px; height:54px; background:#111; border-radius:6px; overflow:hidden; display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; }
+    #youtube .clip .info { font-size:12px; }
+    #youtube .clip .info .name { font-weight:600; }
+    #youtube .small { font-size:12px; color:gray; }
+    /* ensure it remains compact on small screens */
+    @media (max-width:820px) {
+      #youtube .layout { flex-direction:column; }
+      #youtube .sidebar { width:100%; order:2; }
+    }
+  </style>
+  
+  <h1><strong>IkawNga</strong></h1>
+
+  <div class="layout">
+    <div class="main">
+      <div class="player">
+        <!-- small video (320x180) as requested -->
+        <video id="yt-player" width="320" height="180" controls preload="metadata">
+          <source src="https://static.wikia.nocookie.net/region-algarrobo/images/1/1f/Last_moments.mp4/revision/latest?cb=20231007220444&format=original" type="video/mp4">
+          Your browser doesn't support HTML5 video.
+        </video>
+      </div>
+
+      <div class="meta">
+        <div class="title" id="yt-title">Tower of yeet is funny XD</div>
+        <div class="sub" id="yt-sub">Uploaded: October 24, 2024 · 1,234 views</div>
+
+
+        <div class="controls">
+          <button id="like-btn">👍 Like</button>
+          <button id="share-btn">🔗 Share</button>
+          <button id="save-btn">💾 Save</button>
+        </div>
+
+        <div class="description small" id="yt-desc">
+          A silly short clip -- Tower of yeet is funny XD. (Sample video)
+        </div>
+      </div>
+    </div>
+
+    <aside class="sidebar">
+      <div style="font-weight:700; margin-bottom:8px;"><h1>Other Videos</h1></div>
+      <div class="playlist" id="playlist">
+
+        <!-- Clip 1: the sample video -->
+        <div class="clip" data-src="https://static.wikia.nocookie.net/region-algarrobo/images/1/1f/Last_moments.mp4/revision/latest?cb=20231007220444&format=original" data-title="Tower of yeet is funny XD" data-date="October 24, 2024" data-user="@FunnyTower">
+          <div class="thumb">VID</div>
+          <div class="info">
+            <div class="name"><strong>Tower of yeet is funny XD</strong></div>
+            <div class="small">Oct 24, 2024 · 0:03 · @FunnyTower · 23 likes</div>
+          </div>
+        </div>
+
+        <!-- Clip 2: placeholder small sample (uses same video to keep single-file) -->
+        <div class="clip" data-src="https://static.wikia.nocookie.net/region-algarrobo/images/e/eb/Terror_planet_666_part_2_official.mp4/revision/latest?cb=20250630042136&format=original" data-title="Terror Planet 666 part 2 (LOST MEDIA)" data-date="June 30, 2025" data-user="@RossNathen6767">
+          <div class="thumb">VID</div>
+          <div class="info">
+            <div class="name"><strong>Terror Planet 666 part 2 (LOST MEDIA)</strong></div>
+            <div class="small">June 30, 2025 · 3:36 · @RossNathen6767 · 6,767 likes</div>
+          </div>
+        </div>
+
+<!-- Clip 3: Weird montage (Streamable iframe) -->
+  <div class="clip" data-type="iframe" data-title="escaping the chicken gun skybox (ETCGS) Ep. 1: Pt. 1: The Skybox" data-date="Oct 24, 2025" data-desc="escaping the skybox because why not :).">
+    <div style="position:relative; width:100%; height:0px; padding-bottom:45.000%;">
+      <iframe
+        allow="fullscreen"
+        allowfullscreen
+        height="100%"
+        src="https://streamable.com/e/ufnwmn?"
+        width="100%"
+        style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden;">
+      </iframe>
+    </div>
+    <div class="info">
+      <div class="name">ETCGS 1:1</div>
+      <div class="small">Sep 12, 2024 · 0:25 · @LegogoBoi81 · 671 likes</div>
+    </div>
+  </div>
+        
+        <!-- Clip 4: placeholder small sample (uses same video to keep single-file) -->
+        <div class="clip" data-src="https://scontent.fcrk1-4.fna.fbcdn.net/o1/v/t2/f2/m69/AQPa6bnrHxVcsgm_hOF8HXs1qag3Z1akfqWWCs3C-3DA_SndIxrteI_As76MThzKU9HnDxwQTGdonzzKZDTCB1Mm.mp4?_nc_ht=scontent.fcrk1-4.fna.fbcdn.net&_nc_gid=50kQuk_Bq8TVhR_7M2aYhA&_nc_cat=101&_nc_eui2=AeGo8FsWsrHOletSWkGX5S2_rMuOcrgo46ysy45yuCjjrLbgZSG_o7IqD119E-eWQEdJ-rQMOFVsB5FjyHgPphVc&_nc_oc=AdmLDDUBMNBJiQzNGR85DJGwomgiFJk6aRjnY6l5-fuR04v3KwY9WeFCdHIlC1oh-P0&strext=1&cb=c2fcdba8-a66f7739&ccb=9-4&oh=00_Afc2xBLZN0m1-XPiFWpk1qJl4-POPKfjG6YpekAwJMbdwQ&oe=6903427D&_nc_sid=060d78&dl=1" data-title="CG Funny moments be like:" data-date="July 31, 2022" data-user="@Torais37kLostMediaArchives">
+          <div class="thumb">VID</div>
+          <div class="info">
+            <div class="name"><strong>CG Funny moments be like [LOST MEDIA]</strong></div>
+            <div class="small">July 31, 2022 · 0:11 · @Torais37kLostMediaArchives · 67 likes</div>
+          </div>
+        </div>
+
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    // Simple JS to let sidebar clips switch the main player without touching global styles
+    (function(){
+      const player = document.getElementById('yt-player');
+      const title = document.getElementById('yt-title');
+      const sub = document.getElementById('yt-sub');
+      const desc = document.getElementById('yt-desc');
+
+      document.querySelectorAll('#playlist .clip').forEach(clip => {
+        clip.addEventListener('click', () => {
+          const src = clip.getAttribute('data-src');
+          const t = clip.getAttribute('data-title') || 'Untitled';
+          const date = clip.getAttribute('data-date') || 'Unknown date';
+
+// swap source
+while (player.firstChild) player.removeChild(player.firstChild);
+
+if (clip.getAttribute('data-type') === 'iframe') {
+  const iframe = document.createElement('iframe');
+  iframe.src = src;
+  iframe.width = "320";      // same as your MP4 size
+  iframe.height = "180";
+  iframe.frameBorder = "0";
+  iframe.allowFullscreen = true;
+  player.appendChild(iframe);
+} else {
+  const source = document.createElement('source');
+  source.src = src;
+  source.type = 'video/mp4';
+  player.appendChild(source);
+}
+
+
+          // update meta
+          title.textContent = t;
+          sub.textContent = 'Uploaded: ' + date;
+          desc.textContent = clip.getAttribute('data-desc') || (t + ' -- sample description.');
+
+
+          // update username
+          
+
+          // reload & play (play may be blocked by browser autoplay rules)
+          player.load();
+          try { player.play(); } catch(e) { /* autoplay blocked -- user must press play */ }
+        });
+      });
+
+      // Basic button interactions (local UI only)
+      document.getElementById('like-btn').addEventListener('click', () => {
+        const btn = document.getElementById('like-btn');
+        if (btn.dataset.liked) {
+          btn.textContent = '👍 Like';
+          delete btn.dataset.liked;
+        } else {
+          btn.textContent = '✅ Liked';
+          btn.dataset.liked = '1';
+        }
+      });
+
+      document.getElementById('share-btn').addEventListener('click', () => {
+        // copy current video src to clipboard (if allowed)
+        const srcEl = player.querySelector('source');
+        const url = srcEl ? srcEl.src : location.href;
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(url).then(()=> {
+            alert('Video link copied to clipboard!');
+          }, ()=> {
+            prompt('Copy this link:', url);
+          });
+        } else {
+          prompt('Copy this link:', url);
+        }
+      });
+
+      document.getElementById('save-btn').addEventListener('click', () => {
+        alert('Saved to Watch later (fake).');
+      });
+
+    })();
+  </script>
+
+
+    </div>
+    
+<div id="Wiki" class="page">
+<iframe 
+  src="https://region-algarrobo.fandom.com/wiki/Torais37kk_Wiki" 
+  style="position:fixed; top:0; left:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;" 
+  allowfullscreen>
+</iframe>
+</div>
+
+    <script>
+        // Function to show a specific page
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        // Function to search and navigate to a page based on the keyword
+        function searchPage() {
+            const searchQuery = document.getElementById("search").value.toLowerCase();
+            const pages = {
+                "start": "page1",
+                "first": "page1",
+                "begin": "page1",
+                "intro": "page1",
+                "page1": "page1",
+                "website": "websites",
+                "websites": "websites",
+                "website.com": "websites",
+                "list of website": "websites",
+                "list of websites": "websites",
+                "global": "websites",
+                "sites": "websites",
+                "internet": "websites",
+                "spk": "SpK",
+                "keywords": "SpK",
+                "keyword": "SpK",
+                "specialkeywords": "SpK",
+                "specialkeyword": "SpK",
+                "cotc": "COTC",
+                "ctoc": "COTC",
+                "chair of the cosmos": "COTC",
+                "cosmos of the chair": "COTC",
+                "cosmic chair": "COTC",
+                "chitinozoa": "Chitinozoa",
+                "chitinozoan": "Chitinozoa",
+                "chitinozo": "Chitinozoa",
+                "chitonozoa": "Chitinozoa",
+                "false graptolites": "Chitinozoa",
+                "false graptolite": "Chitinozoa",
+                "organic flask": "Chitinozoa",
+                "flask fossil": "Chitinozoa",
+                "flask fossils": "Chitinozoa",
+                "dipl": "Dip",
+                "dipla": "Dip",
+                "diplak": "Dip",
+                "diplakr": "Dip",
+                "diplakri": "Dip",
+                "diplakrid": "Dip",
+                "diplakrida": "Dip",
+                "gallery": "Lphotos",
+                "photo": "Lphotos",
+                "image": "Lphotos",
+                "images": "Lphotos",
+                "photos": "Lphotos",
+                "galleries": "Lphotos",
+                "stimuli": "Stimuli",
+                "sitmuli": "Stimuli",
+                "stimulus": "Stimuli",
+                "tiktok": "Laugh",
+                "laughables": "Laugh",
+                "laughable": "Laugh",
+                "laugh": "Laugh",
+                "giggle": "Laugh",
+                "giggles": "Laugh",
+                "youtube": "IkawNga",
+                "wiki": "Wiki",
+                "wikipedia": "Wiki"
+                
+
+                
+            };
+
+            // Hide all pages initially
+            const allPages = document.querySelectorAll('.page');
+            allPages.forEach(page => page.classList.remove('active'));
+
+            // Show the page corresponding to the search keyword
+            if (pages[searchQuery]) {
+                showPage(pages[searchQuery]);
+            }
+        }
+    </script>
+</body>
+</html>

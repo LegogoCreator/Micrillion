@@ -1,0 +1,254 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!-- === Micrillion Search Bar === -->
+<div class="micrillion-search" style="margin:16px 0; text-align:center;">
+  <input id="micrillionQuery" type="text" placeholder="Search Micrillion..." 
+         style="padding:8px 12px; border-radius:8px; border:1px solid #ccc; width:60%; max-width:300px;">
+  <button onclick="micrillionSearch()" 
+          style="padding:8px 12px; border-radius:8px; background:#7c3aed; color:#fff; border:0; cursor:pointer;">
+    Search
+  </button>
+</div>
+
+<script>
+  // Redirect search queries back to the Micrillion main page
+  function micrillionSearch() {
+    const q = document.getElementById('micrillionQuery').value.trim();
+    if (q) {
+      // Redirect to Micrillion main page with query parameter
+      window.location.href = `index.html?q=${encodeURIComponent(q)}`;
+    } else {
+      alert('Please enter a search term.');
+    }
+  }
+</script>
+
+  <title>IkawNga3 -- Simple YouTube Clone</title>
+  <style>
+    :root{
+      --bg:#f7f7fb;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#1f2937;
+      --glass: rgba(255,255,255,0.7);
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--accent);}
+    header{display:flex;align-items:center;gap:16px;padding:14px 20px;background:linear-gradient(90deg,#fff 0%, #fbfdff 100%);box-shadow:0 1px 0 rgba(0,0,0,0.04);
+    position:sticky;top:0;z-index:20}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:700}
+    .logo .icon{width:38px;height:38px;border-radius:8px;background:linear-gradient(135deg,#ff6b6b,#ffd166);display:flex;align-items:center;justify-content:center;color:white;font-weight:800}
+    .search{flex:1;display:flex}
+    .search input{width:100%;padding:10px 12px;border-radius:999px;border:1px solid rgba(16,24,40,0.06);background:white}
+    main{display:grid;grid-template-columns:3fr 1fr;gap:20px;padding:20px;max-width:1100px;margin:0 auto}
+
+    .video-card{background:var(--card);border-radius:12px;padding:14px;box-shadow:0 6px 18px rgba(11,15,27,0.06)}
+    .video-embed{border-radius:8px;overflow:hidden;background:#000}
+    .meta{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+    .meta .left{display:flex;gap:12px;align-items:center}
+    .uploader{display:flex;gap:10px;align-items:center}
+    .pfp{width:44px;height:44px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    .title{font-size:18px;font-weight:700;margin:0}
+    .sub{color:var(--muted);font-size:13px}
+    .actions{display:flex;gap:10px;align-items:center}
+    .btn-like{background:rgba(99,102,241,0.08);padding:6px 10px;border-radius:8px;font-weight:600;border:none}
+
+    .comments{margin-top:12px}
+    .comment{display:flex;gap:10px;padding:8px 0;border-top:1px dashed rgba(15,23,42,0.03)}
+    .comment:first-child{border-top:0}
+    .comment .body{background:var(--glass);padding:8px 10px;border-radius:10px}
+    .comment .meta{font-size:12px;color:var(--muted);display:flex;gap:8px}
+    .comment-form{display:flex;gap:10px;margin-top:10px}
+    .comment-form input{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(16,24,40,0.06)}
+    .comment-form button{padding:10px 12px;border-radius:10px;border:none;background:#10b981;color:white}
+
+    aside{position:relative}
+    .sidebar-card{background:var(--card);border-radius:12px;padding:12px;box-shadow:0 6px 18px rgba(11,15,27,0.06);margin-bottom:12px}
+    .small-thumb{width:160px;height:90px;border-radius:8px;overflow:hidden}
+    .uploader-handle{font-size:13px;color:var(--muted)}
+
+    footer{padding:40px;text-align:center;color:var(--muted)}
+
+    @media(max-width:900px){main{grid-template-columns:1fr;padding:14px}aside{order:2}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><div class="icon">IK</div><div>IkawNga3</div></div>
+    <div class="search"><input id="search" placeholder="Search IkawNga3"/></div>
+    <div style="display:flex;gap:10px;align-items:center"><button style="padding:8px 12px;border-radius:10px;border:none;background:#111827;color:white">Upload</button></div>
+  </header>
+
+  <main>
+    <section>
+
+      <!-- VIDEO 1 -->
+      <article class="video-card" id="video-1">
+        <div class="video-embed">
+          <video src="Pictures2/MessengerPics/ETCGS1.mp4" controls style="width:100%;height:auto;display:block;border-radius:8px;"></video>
+        </div>
+        <div style="margin-top:10px">
+          <h2 class="title">Escaping The Chicken Gun Skybox (ETCGS) Ep. 1, Pt. 1: The Blackbox</h2>
+          <div class="sub">Oct 24, 2025 • 83,011 views</div>
+        </div>
+
+        <div class="meta">
+          <div class="left">
+            <div class="uploader">
+              <div class="pfp" data-name="LegogoBoi81" style="background:linear-gradient(135deg,#8ec5ff,#e0c3fc)">L</div>
+              <div>
+                <div style="font-weight:700">@LegogoBoi81</div>
+                <div class="sub">Uploaded Oct 24, 2025</div>
+              </div>
+            </div>
+          </div>
+          <div class="actions">
+            <div class="sub">671 Likes</div>
+            <button class="btn-like">👍 Like</button>
+          </div>
+        </div>
+
+        <div class="comments" id="comments-1">
+          <h3 style="margin:6px 0 8px 0">Comments</h3>
+          <div class="comment">
+            <div class="pfp" style="width:40px;height:40px;background:linear-gradient(135deg,#ffd89b,#19547b)">J</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;justify-content:space-between"><strong>@jwgeovw1</strong><span class="sub">2 days ago</span></div>
+              <div class="body">try reaching the Tullybox Zone!</div>
+            </div>
+          </div>
+          <div class="comment">
+            <div class="pfp" style="width:40px;height:40px;background:linear-gradient(135deg,#ff9a9e,#fecfef)">S</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;justify-content:space-between"><strong>@LegogoBoi81</strong><span class="sub">1 day ago</span></div>
+              <div class="body">ts so tuff</div>
+            </div>
+          </div>
+          <form class="comment-form" onsubmit="return addComment(event,'comments-1')">
+            <input id="cname-1" placeholder="Your name (eg. @CoolUser)" required />
+            <input id="ctext-1" placeholder="Add a public comment..." required />
+            <button type="submit">Comment</button>
+          </form>
+        </div>
+      </article>
+
+      <!-- VIDEO 2 -->
+      <article class="video-card" id="video-2" style="margin-top:18px">
+        <div class="video-embed">
+          <video src="Pictures2/MessengerPics/CgFunnyMoments.mp4" controls style="width:100%;height:auto;display:block;border-radius:8px;"></video>
+        </div>
+        <div style="margin-top:10px">
+          <h2 class="title">Chicken Gun Funny Moments Be Like: [ARCHIVED]</h2>
+          <div class="sub">Jul 31, 2022 • 4,568 views</div>
+        </div>
+
+        <div class="meta">
+          <div class="left">
+            <div class="uploader">
+              <div class="pfp" data-name="ToraisLostMediaArchives" style="background:linear-gradient(135deg,#f6d365,#fda085)">T</div>
+              <div>
+                <div style="font-weight:700">@ToraisLostMediaArchives</div>
+                <div class="sub">Uploaded Jul 31, 2022</div>
+              </div>
+            </div>
+          </div>
+          <div class="actions">
+            <div class="sub">72 Likes</div>
+            <button class="btn-like">👍 Like</button>
+          </div>
+        </div>
+
+        <div class="comments" id="comments-2">
+          <h3 style="margin:6px 0 8px 0">Comments</h3>
+          <div class="comment">
+            <div class="pfp" style="width:40px;height:40px;background:linear-gradient(135deg,#cfd9df,#e2ebf0)">G</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;justify-content:space-between"><strong>@GoofyAhhProductionsⓂ️</strong><span class="sub">3 years ago</span></div>
+              <div class="body">honestly, this is one of the most funniest content I've ever seen after 4 years</div>
+            </div>
+          </div>
+          <form class="comment-form" onsubmit="return addComment(event,'comments-2')">
+            <input id="cname-2" placeholder="Your name (eg. @CoolUser)" required />
+            <input id="ctext-2" placeholder="Add a public comment..." required />
+            <button type="submit">Comment</button>
+          </form>
+        </div>
+      </article>
+
+    </section>
+
+    <aside>
+      <div class="sidebar-card">
+        <h4 style="margin:0 0 8px 0">Up next</h4>
+        <div style="display:flex;gap:10px;align-items:center">
+          <div class="small-thumb">
+            <img src="https://placehold.co/320x180/ddd/555.png?text=Thumb" alt="thumb" style="width:100%;height:100%;object-fit:cover;display:block"/>
+          </div>
+          <div>
+            <div style="font-weight:700">Escaping The Chicken Gun Skybox -- Pt. 2</div>
+            <div class="uploader-handle">@LegogoBoi81 • 12,034 views</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <h4 style="margin:0 0 8px 0">Featured channels</h4>
+        <div style="display:flex;gap:8px;flex-direction:column">
+          <div style="display:flex;gap:10px;align-items:center"><div class="pfp" style="width:36px;height:36px;background:linear-gradient(135deg,#a1c4fd,#c2e9fb)">A</div><div style="font-weight:700">@ArchivistA</div></div>
+          <div style="display:flex;gap:10px;align-items:center"><div class="pfp" style="width:36px;height:36px;background:linear-gradient(135deg,#ffecd2,#fcb69f)">G</div><div style="font-weight:700">@GoofyAhhProductions</div></div>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <h4 style="margin:0 0 8px 0">About IkawNga3</h4>
+        <div class="sub">A tiny, playful video site mock -- made for demos and local hosting. Save this file as <code>ikawnga3.html</code> and open it in your browser.</div>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    IkawNga3 • A playful demo -- not affiliated with any real platform
+  </footer>
+
+  <script>
+    function addComment(ev, containerId){
+      ev.preventDefault();
+      const cname = document.getElementById('cname-'+containerId.split('-')[1]).value;
+      const ctext = document.getElementById('ctext-'+containerId.split('-')[1]).value;
+      const container = document.getElementById(containerId);
+
+      const wrap = document.createElement('div');
+      wrap.className = 'comment';
+
+      const pfp = document.createElement('div');
+      pfp.className = 'pfp';
+      pfp.style.width='40px';pfp.style.height='40px';
+      const colorA = '#'+Math.abs(hashCode(cname)).toString(16).slice(0,6).padEnd(6,'0');
+      const colorB = '#'+Math.abs(hashCode(cname+'!')).toString(16).slice(0,6).padEnd(6,'0');
+      pfp.style.background = `linear-gradient(135deg, ${colorA}, ${colorB})`;
+      pfp.textContent = cname.trim().charAt(1) === '' ? cname.trim().charAt(0) : (cname.trim().charAt(0)==='@'?cname.trim().charAt(1):cname.trim().charAt(0));
+
+      const inner = document.createElement('div');
+      inner.style.flex='1';
+      inner.innerHTML = `<div style="display:flex;align-items:center;justify-content:space-between"><strong>${escapeHtml(cname)}</strong><span class="sub">just now</span></div><div class="body">${escapeHtml(ctext)}</div>`;
+
+      wrap.appendChild(pfp);
+      wrap.appendChild(inner);
+      const form = container.querySelector('.comment-form');
+      container.insertBefore(wrap, form);
+      document.getElementById('cname-'+containerId.split('-')[1]).value='';
+      document.getElementById('ctext-'+containerId.split('-')[1]).value='';
+      return false;
+    }
+
+    function hashCode(str){
+      let h=0;for(let i=0;i<str.length;i++){h=(h<<5)-h+str.charCodeAt(i);h|=0}return h>>>0
+    }
+    function escapeHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+  </script>
+</body>
+</html>

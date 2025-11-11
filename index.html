@@ -1,0 +1,132 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Micrillion -- Main</title>
+  <style>
+    :root{--bg:#0f1724;--card:#111827;--muted:#9ca3af;--accent:#7c3aed}
+    *{box-sizing:border-box}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#051025 0%,var(--bg) 60%);color:#e6eef8;margin:0;padding:32px}
+    .wrap{max-width:980px;margin:0 auto}
+    header{display:flex;gap:16px;align-items:center}
+    header img{width:64px;height:64px;object-fit:contain;border-radius:8px}
+    header .brand{line-height:1}
+    header h1{margin:0;font-size:1.6rem}
+    header p{margin:2px 0 0;color:var(--muted);font-size:0.95rem}
+
+    .card{background:rgba(255,255,255,0.03);padding:20px;border-radius:12px;margin-top:20px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+
+    .search-row{display:flex;gap:12px;align-items:center}
+    .search-row input[type=text]{flex:1;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;font-size:1rem}
+    .search-row button{padding:10px 14px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent),#5b21b6);color:white;font-weight:600;cursor:pointer}
+    .meta{color:var(--muted);font-size:0.9rem;margin-top:10px}
+
+    .results{margin-top:18px}
+    .result{display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);margin-bottom:10px;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent)}
+    .result .left{max-width:78%}
+    .result a.title{color:#dbeafe;text-decoration:none;font-weight:700}
+    .result .tld{font-size:0.85rem;color:var(--muted);margin-left:8px}
+    .result .desc{color:var(--muted);font-size:0.9rem;margin-top:4px}
+    .result a.open{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px;border-radius:8px;color:#e6eef8;text-decoration:none}
+
+    .footer{margin-top:22px;color:var(--muted);font-size:0.9rem}
+
+    @media (max-width:620px){header{gap:12px}header h1{font-size:1.25rem} .wrap{padding:0 14px}} 
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <img src="Pictures2/MessengerPics/Micrillion.png" alt="Micrillion logo">
+      <div class="brand">
+        <h1>Micrillion</h1>
+        <p>Sequel to Legogo -- a lightweight, multi-file HTML browser project</p>
+        <p style="margin-top:6px;color:var(--muted);font-size:0.85rem">Created: November 9, 2025 · TLDs: <strong>LgNeo</strong>, <strong>mcr</strong></p>
+      </div>
+    </header>
+    <section class="card">
+      <div class="search-row">
+        <input id="q" type="text" placeholder="Search Micrillion... (try: IkawNga3.LgNeo or DemoGame.mcr)" aria-label="Search">
+        <button id="btn">Search</button>
+      </div>
+      <div class="meta">Search the local project files. Results link to other HTML files inside this Micrillion project.</div>
+
+      <div id="results" class="results" aria-live="polite"></div>
+    </section>
+
+    <div class="footer">Tip: Put this file and Micrillion.png plus other project HTML files in the same folder. Links are relative and will open the corresponding HTML file when clicked.</div>
+  </div>
+
+  <script>
+    // ======= Local project index (edit/add entries as you add files) =======
+    const INDEX = [
+      {title: 'IkawNga3.LgNeo', file: 'IkawNga3.html', desc: 'Video platform demo (comments, profiles).'},
+      {title: 'DemoGame.mcr', file: 'DemoGame.html', desc: 'A demo game page for the project.'},
+      {title: 'Legogo.LgNeo', file: 'LegogoHtml1.html', desc: 'Legacy Legogo home (kept for reference).'},
+      {title: '3dshop.str', file: '3dshop.html', desc: 'a shop for all of the 3d stuff!.'},
+      {title: 'HackerKingAi.str', file: 'HackerKingAI/index.html', desc: 'Early Prototype version of HackerKingAI image generator.'}
+    ];
+
+    // Simple search function: matches on title or file name or tld
+    function search(query){
+      query = (query||'').trim().toLowerCase();
+      if(!query) return INDEX.slice();
+      return INDEX.filter(item => {
+        return item.title.toLowerCase().includes(query)
+          || item.file.toLowerCase().includes(query)
+          || (item.desc && item.desc.toLowerCase().includes(query));
+      });
+    }
+
+    const resultsEl = document.getElementById('results');
+    const input = document.getElementById('q');
+    const btn = document.getElementById('btn');
+
+    function renderList(list){
+      resultsEl.innerHTML = '';
+      if(!list.length){
+        resultsEl.innerHTML = '<div class="result"><div class="left"><div class="desc">No results found.</div></div></div>';
+        return;
+      }
+      list.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'result';
+        div.innerHTML = `
+          <div class="left">
+            <a class="title" href="${item.file}">${escapeHtml(item.title)}</a>
+            <span class="tld">→ ${item.file}</span>
+            <div class="desc">${escapeHtml(item.desc || '')}</div>
+          </div>
+          <div class="right">
+            <a class="open" href="${item.file}">Open</a>
+          </div>
+        `;
+        resultsEl.appendChild(div);
+      });
+    }
+
+    function doSearch(){
+      const q = input.value;
+      const list = search(q);
+      renderList(list);
+    }
+
+    // Escape helper
+    function escapeHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+    // Init: show all results
+    renderList(INDEX);
+
+    btn.addEventListener('click', doSearch);
+    input.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') doSearch(); });
+
+    // simple query param support: ?q=IkawNga3
+    const params = new URLSearchParams(location.search);
+    if(params.has('q')){
+      input.value = params.get('q');
+      doSearch();
+    }
+  </script>
+</body>
+</html>
