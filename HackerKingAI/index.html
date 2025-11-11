@@ -1,0 +1,223 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hacker King AI -- Offline Fake Generator</title>
+  <style>
+    :root{--bg:#0b0b0f;--card:#0f1720;--accent:#39ff14;--muted:#9aa4b2}
+    body{font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(180deg,#020204 0%, #071018 100%);color:#eef;margin:0;display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px}
+    .card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(6px);padding:14px;border-radius:12px;max-width:520px;width:100%}
+    header{display:flex;gap:12px;align-items:center}
+    h1{margin:0;font-size:18px}
+    .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    button{background:#111;color:var(--accent);padding:8px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);cursor:pointer}
+    button.secondary{background:transparent;color:var(--muted);border:1px dashed rgba(255,255,255,0.03)}
+    canvas{display:block;width:100%;max-width:480px;height:auto;border-radius:8px;background:#05060a}
+    .small{font-size:12px;color:var(--muted)}
+    footer{font-size:12px;color:var(--muted);margin-top:6px;text-align:center}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <header>
+      <h1>Hacker King AI -- Offline Fake Generator</h1>
+    </header>
+
+    <p class="small">Uses your images from <code>Pictures2/HackerKingAI/</code>. Generates low-res, glitchy, retro-AI style images by remixing and applying pixel / color effects.
+    </p>
+
+    <div class="controls">
+      <button id="genBtn">Generate</button>
+      <button id="varBtn" class="secondary">Variation</button>
+      <button id="saveBtn" class="secondary">Save PNG</button>
+      <button id="clearBtn" class="secondary">Clear</button>
+    </div>
+
+    <div style="margin-top:12px;display:grid;gap:8px">
+      <canvas id="aiCanvas" width="128" height="128"></canvas>
+      <div class="small">Tip: tap <strong>Generate</strong> multiple times for different random glitches. Want it worse? lower the resolution (edit canvas width/height in the file).</div>
+    </div>
+  </div>
+
+  <footer>Images used: FRIES_Orca.jpeg, Tiktok1.jpg, Untitled1003.png (in Pictures2/HackerKingAI)</footer>
+
+<script>
+// --- Configuration ---
+const IMAGES = [
+  'Pictures2/HackerKingAI/FRIES_Orca.jpeg',
+  'Pictures2/HackerKingAI/Tiktok1.jpg',
+  'Pictures2/HackerKingAI/Untitled1003.png'
+];
+const CANVAS_SIZE = 128; // low = more "bad AI" look; change to 64 or 32 for worse results
+
+// --- Helpers ---
+const canvas = document.getElementById('aiCanvas');
+const ctx = canvas.getContext('2d');
+canvas.width = CANVAS_SIZE;
+canvas.height = CANVAS_SIZE;
+
+function rnd(seedlessProb = 1){ return Math.random() * seedlessProb; }
+
+function loadRandomImage(){
+  return new Promise((res, rej) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.src = IMAGES[Math.floor(Math.random() * IMAGES.length)];
+    img.onload = () => res(img);
+    img.onerror = (e) => rej(e);
+  });
+}
+
+// --- Fake-generation pipeline ---
+async function generate() {
+  try {
+    const img = await loadRandomImage();
+
+    // --- draw base reduced-size image (forces pixelation) ---
+    const off = document.createElement('canvas');
+    const octx = off.getContext('2d');
+    const small = 32; // draw at tiny size then scale up
+    off.width = small;
+    off.height = small;
+    octx.drawImage(img, 0, 0, small, small);
+
+    // optionally mix with a second random image half the time
+    if (Math.random() < 0.6) {
+      const img2 = await loadRandomImage();
+      octx.globalAlpha = 0.4 + Math.random() * 0.5;
+      octx.drawImage(img2, 0, 0, small, small);
+      octx.globalAlpha = 1;
+    }
+
+    // scale up to canvas (pixelated)
+    ctx.imageSmoothingEnabled = false;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.drawImage(off, 0, 0, canvas.width, canvas.height);
+
+    // --- raw pixel manipulation for glitchy artifacts ---
+    let imageData = ctx.getImageData(0,0,canvas.width,canvas.height);
+    let d = imageData.data;
+
+    // color channel jitter
+    for (let i = 0; i < d.length; i += 4) {
+      // small chance to swap channels
+      if (Math.random() < 0.04) {
+        const r = d[i], g = d[i+1], b = d[i+2];
+        d[i] = g; d[i+1] = b; d[i+2] = r;
+      }
+      // occasional brightness spikes
+      if (Math.random() < 0.02) {
+        d[i] = Math.min(255, d[i] + Math.floor(Math.random()*120));
+        d[i+1] = Math.min(255, d[i+1] + Math.floor(Math.random()*80));
+      }
+    }
+
+    // block-level glitched horizontal shifts
+    const rows = 6 + Math.floor(Math.random() * 6);
+    for (let r = 0; r < rows; r++) {
+      if (Math.random() < 0.6) continue; // skip most rows to keep it subtle
+      const rowY = Math.floor((r / rows) * canvas.height);
+      const height = 1 + Math.floor(Math.random() * 3);
+      const shift = -12 + Math.floor(Math.random() * 24);
+      // copy row to temp
+      const rowData = ctx.getImageData(0, rowY, canvas.width, height);
+      ctx.putImageData(rowData, shift, rowY);
+    }
+
+    // put pixel-modified data back
+    ctx.putImageData(imageData, 0, 0);
+
+    // overlay scanlines / noise
+    overlayNoise();
+
+    // tiny posterize occasionally
+    if (Math.random() < 0.5) posterize(3 + Math.floor(Math.random()*5));
+
+  } catch (e) {
+    console.error('generate error', e);
+    alert('Failed to load images. Make sure files exist at Pictures2/HackerKingAI/');
+  }
+}
+
+function overlayNoise(){
+  const im = ctx.getImageData(0,0,canvas.width,canvas.height);
+  const p = im.data;
+  for (let i = 0; i < p.length; i += 4) {
+    if (Math.random() < 0.02) {
+      // light static
+      const v = (Math.random() - 0.5) * 40;
+      p[i] = Math.max(0, Math.min(255, p[i] + v));
+      p[i+1] = Math.max(0, Math.min(255, p[i+1] + v));
+      p[i+2] = Math.max(0, Math.min(255, p[i+2] + v));
+    }
+  }
+  ctx.putImageData(im, 0, 0);
+
+  // subtle horizontal scanlines
+  ctx.globalAlpha = 0.06;
+  for (let y = 0; y < canvas.height; y += 2) {
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, y, canvas.width, 1);
+  }
+  ctx.globalAlpha = 1;
+}
+
+function posterize(levels){
+  const im = ctx.getImageData(0,0,canvas.width,canvas.height);
+  const p = im.data;
+  for (let i = 0; i < p.length; i += 4) {
+    p[i] = Math.floor(p[i] / 255 * levels) * Math.floor(255 / (levels-1));
+    p[i+1] = Math.floor(p[i+1] / 255 * levels) * Math.floor(255 / (levels-1));
+    p[i+2] = Math.floor(p[i+2] / 255 * levels) * Math.floor(255 / (levels-1));
+  }
+  ctx.putImageData(im, 0, 0);
+}
+
+// Variation: re-run glitches without reloading a new base image
+function variation(){
+  // small transforms on current canvas
+  const temp = document.createElement('canvas');
+  temp.width = canvas.width; temp.height = canvas.height;
+  const tctx = temp.getContext('2d');
+  tctx.drawImage(canvas, 0, 0);
+  // add heavy channel shifts
+  let im = tctx.getImageData(0,0,temp.width,temp.height);
+  let d = im.data;
+  for (let i = 0; i < d.length; i += 4) {
+    if (Math.random() < 0.08) {
+      d[i] = d[i] ^ (Math.floor(Math.random()*64));
+      d[i+1] = d[i+1] ^ (Math.floor(Math.random()*32));
+      d[i+2] = 255 - d[i+2];
+    }
+  }
+  tctx.putImageData(im,0,0);
+  // slight blur by scaling down and up
+  const small = 32;
+  const off = document.createElement('canvas'); off.width = small; off.height = small; const octx = off.getContext('2d');
+  octx.drawImage(temp, 0, 0, small, small);
+  ctx.imageSmoothingEnabled = false;
+  ctx.drawImage(off, 0, 0, canvas.width, canvas.height);
+}
+
+// Save
+function savePNG(){
+  const a = document.createElement('a');
+  a.href = canvas.toDataURL('image/png');
+  a.download = 'hackerkingai_' + Date.now() + '.png';
+  a.click();
+}
+
+function clearCanvas(){ ctx.clearRect(0,0,canvas.width,canvas.height); }
+
+// Buttons
+document.getElementById('genBtn').addEventListener('click', generate);
+document.getElementById('varBtn').addEventListener('click', variation);
+document.getElementById('saveBtn').addEventListener('click', savePNG);
+document.getElementById('clearBtn').addEventListener('click', clearCanvas);
+
+// initial quick generate on load
+window.addEventListener('load', () => setTimeout(() => generate(), 250));
+</script>
+</body>
+</html>
