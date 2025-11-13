@@ -1,1 +1,292 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Hacker King AI — Fake Generator v2</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root{--bg:#070707;--panel:#0f0f0f;--muted:#bfc3c8}
+    html,body{height:100%;margin:0;background:var(--bg);color:#eee;font-family:system-ui,Arial}
+    .wrap{display:flex;gap:18px;padding:18px}
+    .left{width:320px;background:var(--panel);padding:14px;border-radius:10px}
+    h1{margin:6px 0;font-size:20px}
+    .controls{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+    label{font-size:13px;color:var(--muted)}
+    button,input[type=range],select{padding:8px;border-radius:8px;border:1px solid #222;background:#081018;color:#fff}
+    canvas{background:#222;border-radius:8px;image-rendering:pixelated;display:block}
+    .previews{display:flex;gap:8px;margin-top:10px}
+    .small{font-size:12px;color:var(--muted)}
+    footer{position:fixed;right:12px;bottom:12px;font-size:12px;color:#888}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="left">
+      <h1>Hacker King AI — v2</h1>
+      <div class="small">Randomly mixes your Pictures2 images, applies noise, glitch, displacement and <strong>blur</strong>. Retro low-res style.</div>
 
+      <div class="controls">
+        <button id="generateBtn">Generate</button>
+        <button id="downloadBtn">Download PNG</button>
+
+        <label>Resolution
+          <select id="resolution">
+            <option value="32">32×32</option>
+            <option value="64" selected>64×64 (retro)</option>
+            <option value="128">128×128</option>
+            <option value="256">256×256</option>
+          </select>
+        </label>
+
+        <label>Mix strength <input id="mixRange" type="range" min="0" max="1" step="0.01" value="0.6"></label>
+        <label>Noise amount <input id="noiseRange" type="range" min="0" max="1" step="0.01" value="0.12"></label>
+        <label>Glitchiness <input id="glitchRange" type="range" min="0" max="1" step="0.01" value="0.25"></label>
+        <label>Blur amount <input id="blurRange" type="range" min="0" max="8" step="0.25" value="1.2"></label>
+        <label><input id="seedRandom" type="checkbox" checked> Random seed each generate</label>
+        <label>Seed <input id="seedInput" type="number" min="0" value="0"></label>
+        <div class="small">Tip: lower res + stronger pixelation + blur = more retro/low-quality AI look.</div>
+      </div>
+    </div>
+
+    <div>
+      <canvas id="out" width="64" height="64"></canvas>
+      <div class="previews">
+        <canvas id="preview1" width="128" height="128" style="width:128px;height:128px;border-radius:6px"></canvas>
+        <canvas id="preview2" width="128" height="128" style="width:128px;height:128px;border-radius:6px"></canvas>
+      </div>
+      <div style="margin-top:10px;color:#999;font-size:13px">Seed: <span id="seedReadout">—</span></div>
+    </div>
+  </div>
+
+  <footer>Hacker King AI • Fake generator v2</footer>
+
+<script>
+/*
+  Hacker King AI - index2.html (v2)
+  - Place this file at: HackerKingAI/index2.html
+  - Images location is assumed at ../Pictures2/...
+  - Watermark is drawn bottom-left from the watermark path.
+
+  Image list provided by user:
+  Pictures2/HackerKingAI/FRIES_Orca.jpeg
+  Pictures2/HackerKingAI/Tiktok1.jpg
+  Pictures2/HackerKingAI/Untitled1003.png
+  Pictures2/HackerKingAI/Messenger_creation_824529923060121.jpeg
+  Pictures2/HackerKingAI/Uhh1.jpg
+  Pictures2/HackerKingAI/Sixseven.jpeg
+
+  Watermark: Pictures2/MessengerPics/HackerKing.png
+*/
+
+const IMAGE_PATHS = [
+  '../Pictures2/HackerKingAI/FRIES_Orca.jpeg',
+  '../Pictures2/HackerKingAI/Tiktok1.jpg',
+  '../Pictures2/HackerKingAI/Untitled1003.png',
+  '../Pictures2/HackerKingAI/Messenger_creation_824529923060121.jpeg',
+  '../Pictures2/HackerKingAI/Uhh1.jpg',
+  '../Pictures2/HackerKingAI/Sixseven.jpeg'
+];
+const WATERMARK_PATH = '../Pictures2/MessengerPics/HackerKing.png';
+
+const outCanvas = document.getElementById('out');
+const outCtx = outCanvas.getContext('2d', { willReadFrequently: true });
+const preview1 = document.getElementById('preview1');
+const preview2 = document.getElementById('preview2');
+const pctx1 = preview1.getContext('2d');
+const pctx2 = preview2.getContext('2d');
+
+const imgs = [];
+let watermarkImg = null;
+
+// Mulberry32 seeded RNG
+function seededRng(a) {
+  return function() {
+    a |= 0; a = a + 0x6D2B79F5 | 0;
+    var t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  }
+}
+
+function rand(r){ return r(); }
+
+function loadImage(path){
+  return new Promise(resolve => {
+    const i = new Image();
+    i.crossOrigin = 'anonymous';
+    i.src = path;
+    i.onload = () => resolve(i);
+    i.onerror = () => resolve(createFallback(path));
+  });
+}
+
+function loadImages(paths){ return Promise.all(paths.map(loadImage)); }
+
+function createFallback(path){
+  const c = document.createElement('canvas'); c.width=256; c.height=256;
+  const ctx = c.getContext('2d'); ctx.fillStyle='#333'; ctx.fillRect(0,0,256,256);
+  ctx.fillStyle='#999'; ctx.fillText('missing',8,20);
+  const img = new Image(); img.src = c.toDataURL(); return img;
+}
+
+function drawImageCover(ctx,img,w,h){
+  const iw=img.width, ih=img.height; const rs = Math.max(w/iw, h/ih);
+  const sw = w/rs, sh = h/rs; const sx = Math.max(0,(iw-sw)/2), sy = Math.max(0,(ih-sh)/2);
+  ctx.drawImage(img, sx, sy, sw, sh, 0,0,w,h);
+}
+
+function pixelate(canvas, size){
+  const w=canvas.width, h=canvas.height; const tmp=document.createElement('canvas'); tmp.width=size; tmp.height=size;
+  const tctx = tmp.getContext('2d'); tctx.drawImage(canvas,0,0,size,size);
+  const ctx = canvas.getContext('2d'); ctx.imageSmoothingEnabled=false; ctx.clearRect(0,0,w,h); ctx.drawImage(tmp,0,0,w,h);
+}
+
+function addNoise(ctx,amount,rng){
+  const w=ctx.canvas.width,h=ctx.canvas.height; const id = ctx.getImageData(0,0,w,h); const d=id.data;
+  for(let i=0;i<d.length;i+=4){ const n=(rand(rng)-0.5)*255*amount; d[i]=clamp(d[i]+n); d[i+1]=clamp(d[i+1]+n); d[i+2]=clamp(d[i+2]+n); }
+  ctx.putImageData(id,0,0);
+}
+function clamp(v){return Math.max(0,Math.min(255,Math.round(v)));}
+
+function posterize(ctx,levels=4){
+  const w=ctx.canvas.width,h=ctx.canvas.height; const id=ctx.getImageData(0,0,w,h), d=id.data; const step = Math.floor(256/levels);
+  for(let i=0;i<d.length;i+=4){ d[i]=Math.floor(d[i]/step)*step; d[i+1]=Math.floor(d[i+1]/step)*step; d[i+2]=Math.floor(d[i+2]/step)*step; }
+  ctx.putImageData(id,0,0);
+}
+
+function sineDisplace(canvas, amplitude=4, frequency=8, rng){
+  const w=canvas.width,h=canvas.height; const src = canvas.getContext('2d').getImageData(0,0,w,h);
+  const dst = new ImageData(w,h); const sd = src.data, dd = dst.data;
+  for(let y=0;y<h;y++){ const shift = Math.floor((Math.sin((y/frequency) + rand(rng)*6.28) * amplitude));
+    for(let x=0;x<w;x++){ const sx = Math.max(0,Math.min(w-1,x+shift)); const si=(y*w+sx)*4; const di=(y*w+x)*4;
+      dd[di]=sd[si]; dd[di+1]=sd[si+1]; dd[di+2]=sd[si+2]; dd[di+3]=sd[si+3]; }
+  }
+  canvas.getContext('2d').putImageData(dst,0,0);
+}
+
+function channelShift(ctx,offsetX,offsetY){
+  const canvas = ctx.canvas; const w=canvas.width,h=canvas.height; const id=ctx.getImageData(0,0,w,h); const d=id.data; const tmp=new Uint8ClampedArray(d.length); tmp.set(d);
+  const shift = (offsetY*w + offsetX)*4;
+  for(let i=0;i<d.length;i+=4){ const rIdx=i, gIdx=i+1, bIdx=i+2;
+    const idxR = clampIndex(rIdx+shift,d.length); const idxG=clampIndex(gIdx-shift,d.length); const idxB=clampIndex(bIdx+Math.floor(shift/2),d.length);
+    d[rIdx]=tmp[idxR]||tmp[rIdx]; d[gIdx]=tmp[idxG]||tmp[gIdx]; d[bIdx]=tmp[idxB]||tmp[bIdx]; }
+  ctx.putImageData(id,0,0);
+}
+function clampIndex(i,len){ if(i<0) return 0; if(i>len-4) return len-4; return i; }
+
+function blockGlitch(ctx,amount,rng){ const w=ctx.canvas.width,h=ctx.canvas.height; const swaps=Math.floor(amount*10)+1;
+  for(let s=0;s<swaps;s++){ const bw=Math.max(2,Math.floor(rand(rng)*w*0.4)); const bh=Math.max(2,Math.floor(rand(rng)*h*0.2));
+    const sx=Math.floor(rand(rng)*(w-bw)); const sy=Math.floor(rand(rng)*(h-bh)); const dx=Math.floor(rand(rng)*(w-bw)); const dy=Math.floor(rand(rng)*(h-bh));
+    const id=ctx.getImageData(sx,sy,bw,bh); ctx.putImageData(id,dx,dy);
+  }
+}
+
+// draw and mix chosen images
+function mixImages(canvas, chosen, mixStrength, rng, blurAmount=0){
+  const ctx = canvas.getContext('2d'); const w=canvas.width,h=canvas.height; ctx.clearRect(0,0,w,h);
+  chosen.forEach((img, idx)=>{
+    const tmp=document.createElement('canvas'); tmp.width=w; tmp.height=h; const tctx=tmp.getContext('2d');
+    // apply blur via context filter when drawing the img to tmp
+    tctx.save();
+    tctx.filter = blurAmount>0 ? `blur(${blurAmount}px)` : 'none';
+    // random small transform
+    const tx = Math.floor((rand(rng)-0.5)*w*0.12);
+    const ty = Math.floor((rand(rng)-0.5)*h*0.12);
+    const scale = 1 + (rand(rng)-0.5)*0.4;
+    const rot = (rand(rng)-0.5)*0.3;
+    tctx.translate(w/2+tx,h/2+ty); tctx.rotate(rot); tctx.scale(scale,scale); tctx.translate(-w/2,-h/2);
+    drawImageCover(tctx,img,w,h);
+    tctx.restore();
+
+    ctx.globalAlpha = 0.5 * mixStrength * (1 - idx*0.08) + 0.25*(rand(rng));
+    ctx.drawImage(tmp,0,0);
+  });
+  ctx.globalAlpha = 1.0;
+}
+
+function drawWatermark(ctx){ if(!watermarkImg) return; try{
+    const s = Math.max(24, Math.floor(ctx.canvas.width*0.18)); // watermark size relative to canvas
+    const pad = Math.max(6, Math.floor(ctx.canvas.width*0.03));
+    ctx.globalAlpha = 0.9; ctx.drawImage(watermarkImg, pad, ctx.canvas.height - s - pad, s, s);
+    ctx.globalAlpha = 1.0;
+  }catch(e){/*ignore*/}
+}
+
+function generate(rseed=null){
+  const res = parseInt(document.getElementById('resolution').value,10);
+  outCanvas.width = res; outCanvas.height = res;
+  preview1.width = res; preview1.height = res; preview2.width = res; preview2.height = res;
+
+  let seed;
+  const seedRandom = document.getElementById('seedRandom').checked;
+  const seedInput = parseInt(document.getElementById('seedInput').value,10) || 0;
+  if(seedRandom || rseed === null) seed = Math.floor(Math.random()*1e9); else seed = seedInput;
+  document.getElementById('seedReadout').innerText = seed;
+  const r = seededRng(seed);
+
+  // pick 2-4 images
+  const count = 2 + Math.floor(rand(r)*3); // 2..4
+  const chosen=[]; const idxs=[];
+  while(chosen.length < count){ const i = Math.floor(rand(r)*imgs.length); if(!idxs.includes(i)){idxs.push(i); chosen.push(imgs[i]);}}
+
+  const mixStrength = parseFloat(document.getElementById('mixRange').value);
+  const noise = parseFloat(document.getElementById('noiseRange').value);
+  const glitch = parseFloat(document.getElementById('glitchRange').value);
+  const blurAmount = parseFloat(document.getElementById('blurRange').value);
+
+  // mix images with blur applied per-source
+  mixImages(outCanvas, chosen, mixStrength, r, blurAmount);
+
+  // optional pixelated pass
+  if(rand(r) > 0.3){ const pixelSize = Math.max(2, Math.floor(res/(4 + Math.floor(rand(r)*6)))); pixelate(outCanvas, Math.max(8, Math.floor(res/pixelSize))); }
+
+  // channel shift
+  if(rand(r) < 0.95) channelShift(outCtx, Math.floor((rand(r)-0.5)*res*0.08), Math.floor((rand(r)-0.5)*res*0.08));
+
+  // add noise
+  if(noise > 0.01) addNoise(outCtx, noise * (0.8 + rand(r)*0.8), r);
+
+  // sine displacement
+  if(rand(r) < 0.85) sineDisplace(outCanvas, Math.max(1, Math.floor(res*(0.02 + rand(r)*0.07))), Math.max(6, Math.floor(6 + rand(r)*14)), r);
+
+  // block glitch
+  if(glitch > 0.02 && rand(r) < 0.9) blockGlitch(outCtx, glitch, r);
+
+  // posterize sometimes
+  if(rand(r) < 0.7) posterize(outCtx, 3 + Math.floor(rand(r)*5));
+
+  // small gaussian-like blur final pass using CSS filter via temp canvas
+  if(blurAmount > 0.01 && rand(r) < 0.95){
+    const tmp = document.createElement('canvas'); tmp.width=res; tmp.height=res; const tctx=tmp.getContext('2d');
+    tctx.filter = `blur(${(blurAmount * (0.5 + rand(r))) }px)`; tctx.drawImage(outCanvas,0,0);
+    outCtx.clearRect(0,0,res,res); outCtx.drawImage(tmp,0,0);
+  }
+
+  // draw watermark bottom-left
+  drawWatermark(outCtx);
+
+  // previews (scaled up, keep pixelated look)
+  pctx1.clearRect(0,0,preview1.width,preview1.height); pctx1.imageSmoothingEnabled=false; pctx1.drawImage(outCanvas,0,0,preview1.width,preview1.height);
+  pctx2.clearRect(0,0,preview2.width,preview2.height); pctx2.imageSmoothingEnabled=false; pctx2.save(); pctx2.globalAlpha=0.95; pctx2.drawImage(outCanvas,0,0,preview2.width,preview2.height); pctx2.restore();
+
+  console.log('Generated seed',seed);
+  return seed;
+}
+
+function downloadCanvas(){ const a=document.createElement('a'); a.href = outCanvas.toDataURL('image/png'); a.download = 'hackerkingai_v2.png'; a.click(); }
+
+document.getElementById('generateBtn').addEventListener('click', ()=> generate());
+document.getElementById('downloadBtn').addEventListener('click', downloadCanvas);
+
+// load images + watermark
+loadImages(IMAGE_PATHS).then(results=>{ imgs.push(...results); // draw source previews
+  pctx1.clearRect(0,0,preview1.width,preview1.height); pctx1.drawImage(imgs[0],0,0,preview1.width,preview1.height);
+  pctx2.clearRect(0,0,preview2.width,preview2.height); pctx2.drawImage(imgs[1%imgs.length],0,0,preview2.width,preview2.height);
+  return loadImage(WATERMARK_PATH);
+}).then(wm=>{ watermarkImg = wm; // initial generate
+  generate(Math.floor(Math.random()*1e9));
+}).catch(e=>{ console.error('load error',e); generate(Math.floor(Math.random()*1e9)); });
+
+</script>
+</body>
+</html>
