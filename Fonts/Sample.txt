@@ -1,0 +1,2 @@
+this file is used to create a folder. its only function is to pretty much make a
+new folder and not anything else.
