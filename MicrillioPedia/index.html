@@ -3,107 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MicrillioPedia - Main Page</title>
+    <title>MicrillioPedia</title>
+    
     <!-- Custom Font -->
     <style>
         @font-face {
             font-family: 'LegogoFont';
-            src: url('../Fonts/FontByLegogoCreator.ttf') format('truetype');
+            src: url('https://legogocreator.github.io/Micrillion/Fonts/FontByLegogoCreator.ttf') format('truetype');
         }
 
         body {
-            background-color: #12194f;
-            font-family: 'LegogoFont', sans-serif;
-            color: #ffffff;
             margin: 0;
             padding: 0;
+            font-family: 'LegogoFont', sans-serif;
+            background-color: #12194f;
+            color: #ffffff;
         }
 
         header {
             text-align: center;
-            padding: 50px 20px 20px 20px;
+            padding: 40px 20px 20px 20px;
         }
 
         header h1 {
-            font-size: 48px;
-            margin-bottom: 10px;
+            font-size: 3em;
+            margin: 0;
+            color: #f0f0f0;
         }
 
         header p {
-            font-size: 18px;
-            color: #c0c0ff;
-        }
-
-        nav {
-            text-align: center;
-            margin: 30px 0;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #ffffff;
-            margin: 0 15px;
-            font-size: 20px;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
+            font-size: 1.2em;
             color: #c0c0ff;
         }
 
         .search-container {
             text-align: center;
-            margin-bottom: 50px;
+            margin: 30px 0;
         }
 
         .search-container input[type="text"] {
             padding: 10px;
             width: 300px;
-            font-size: 16px;
-            border: none;
             border-radius: 5px;
+            border: none;
+            font-size: 1em;
         }
 
         .search-container button {
             padding: 10px 20px;
-            font-size: 16px;
-            background-color: #3b50a4;
-            border: none;
             border-radius: 5px;
-            color: #fff;
+            border: none;
+            background-color: #4a5aff;
+            color: white;
+            font-size: 1em;
             cursor: pointer;
-            margin-left: 5px;
-            transition: background-color 0.3s;
         }
 
-        .search-container button:hover {
-            background-color: #5c68d1;
-        }
-
-        .wiki-section {
+        .page-list {
             max-width: 800px;
-            margin: 0 auto 50px auto;
-            text-align: center;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        .wiki-section h2 {
-            font-size: 32px;
-            margin-bottom: 15px;
+        .page-item {
+            background-color: #1a246e;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
         }
 
-        .wiki-section p {
-            font-size: 18px;
-            color: #d0d0ff;
+        .page-item a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        .page-item a:hover {
+            text-decoration: underline;
+            color: #c0c0ff;
         }
 
         footer {
             text-align: center;
             padding: 20px;
-            color: #c0c0ff;
-            background-color: #0d1440;
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #8888ff;
         }
     </style>
 </head>
+<body>
+
+    <header>
+        <h1>MicrillioPedia</h1>
+        <p>Your hub for documenting and gathering sources from Micrillion Websites.</p>
+    </header>
+
+    <div class="search-container">
+        <input type="text" id="searchBox" placeholder="Search pages...">
+        <button onclick="searchPage()">Search</button>
+    </div>
+
+    <div class="page-list" id="pageList">
+        <div class="page-item">
+            <a href="MicrillioPedia/Dirtforms.html">Dirtforms</a>
+            <p>Learn about Dirtforms, one of the unique concepts on Micrillion.</p>
+        </div>
+        <!-- Add more pages here as needed -->
+    </div>
+
+    <footer>
+        &copy; 2025 MicrillioPedia. All rights reserved.
+    </footer>
+
+    <script>
+        const pages = [
+            {name: "Dirtforms", path: "MicrillioPedia/Dirtforms.html"}
+            // Add more pages as needed
+        ];
+
+        function searchPage() {
+            const query = document.getElementById('searchBox').value.toLowerCase();
+            const page = pages.find(p => p.name.toLowerCase() === query);
+
+            if (page) {
+                window.location.href = page.path;
+            } else {
+                alert("Page not found. Try 'Dirtforms'.");
+            }
+        }
+    </script>
+
+</body>
+</html>
 <body>
 
     <header>
