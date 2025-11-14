@@ -3,45 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MicrillioPedia</title>
-    <!-- Link to external CSS -->
-    <link rel="stylesheet" href="MicrillioPedia/Debut.css">
-    <!-- Link to external JS -->
-    <script defer src="MicrillioPedia/Functions.js"></script>
+    <title>MicrillioPedia - Main Page</title>
+    <!-- Custom Font -->
+    <style>
+        @font-face {
+            font-family: 'LegogoFont';
+            src: url('Fonts/FontByLegogoCreator.ttf') format('truetype');
+        }
+
+        body {
+            background-color: #12194f;
+            font-family: 'LegogoFont', sans-serif;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px 20px 20px;
+        }
+
+        header h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 18px;
+            color: #c0c0ff;
+        }
+
+        nav {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #ffffff;
+            margin: 0 15px;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #c0c0ff;
+        }
+
+        .search-container {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .search-container input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .search-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #3b50a4;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            margin-left: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .search-container button:hover {
+            background-color: #5c68d1;
+        }
+
+        .wiki-section {
+            max-width: 800px;
+            margin: 0 auto 50px auto;
+            text-align: center;
+        }
+
+        .wiki-section h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .wiki-section p {
+            font-size: 18px;
+            color: #d0d0ff;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #c0c0ff;
+            background-color: #0d1440;
+        }
+    </style>
 </head>
 <body>
+
     <header>
         <h1>MicrillioPedia</h1>
-        <p>Your hub for all Micrillion websites, documenting and gathering sources across the Micrillion network.</p>
+        <p>Your source hub for all things Micrillion websites and projects.</p>
     </header>
 
     <nav>
-        <h2>Quick Links</h2>
-        <ul>
-            <li><a href="MicrillioPedia/Dirtforms.html">Dirtforms</a></li>
-            <!-- Add more pages here as your wiki grows -->
-        </ul>
+        <a href="index.html">Home</a>
+        <a href="MicrillioPedia/Dirtforms.html">Dirtforms</a>
+        <!-- Add more page links here -->
     </nav>
 
-    <section id="search-section">
-        <h2>Search MicrillioPedia</h2>
-        <!-- Search engine functionality is handled in Functions.js -->
-        <input type="text" id="wiki-search" placeholder="Search pages...">
-        <button id="search-btn">Search</button>
-        <div id="search-results"></div>
-    </section>
+    <div class="search-container">
+        <input type="text" id="searchBox" placeholder="Search MicrillioPedia...">
+        <button onclick="searchWiki()">Search</button>
+    </div>
 
-    <section id="description">
-        <h2>About MicrillioPedia</h2>
-        <p>
-            MicrillioPedia is a community-driven wiki that collects information, tutorials, and references
-            from all Micrillion-related websites. Explore pages, read articles, and find detailed sources 
-            for all things Micrillion.
-        </p>
-    </section>
+    <div class="wiki-section">
+        <h2>Welcome to MicrillioPedia!</h2>
+        <p>MicrillioPedia gathers information from various Micrillion websites to create a centralized documentation platform. You can explore individual pages, read detailed descriptions, and access related sources all in one place.</p>
+    </div>
+
+    <div class="wiki-section">
+        <h2>Example Page: Dirtforms</h2>
+        <p>Dirtforms is an example page documenting a Micrillion website. Click the link in the navigation above to view it and see how individual pages are structured.</p>
+    </div>
 
     <footer>
-        <p>&copy; 2025 MicrillioPedia. All rights reserved.</p>
+        &copy; 2025 MicrillioPedia. All rights reserved.
     </footer>
+
+    <script>
+        function searchWiki() {
+            const query = document.getElementById('searchBox').value.toLowerCase();
+            
+            // For now, the search only works for these two example pages
+            if (query.includes("dirtforms")) {
+                window.location.href = "MicrillioPedia/Dirtforms.html";
+            } else if (query.includes("home") || query === "") {
+                window.location.href = "index.html";
+            } else {
+                alert("No results found. Try searching for 'Dirtforms'.");
+            }
+        }
+    </script>
+
 </body>
 </html>
