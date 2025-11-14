@@ -3,68 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MicrillioPedia - The Micrillion Encyclopedia</title>
-
-    <!-- CSS -->
+    <title>MicrillioPedia</title>
+    <!-- Link to external CSS -->
     <link rel="stylesheet" href="MicrillioPedia/Debut.css">
+    <!-- Link to external JS -->
+    <script defer src="MicrillioPedia/Functions.js"></script>
 </head>
 <body>
-
-    <header class="header">
-        <h1 class="title">MicrillioPedia</h1>
-        <p class="subtitle">The Central Knowledge Base of All Micrillion Websites</p>
+    <header>
+        <h1>MicrillioPedia</h1>
+        <p>Your hub for all Micrillion websites, documenting and gathering sources across the Micrillion network.</p>
     </header>
 
-    <!-- Search Bar from JS -->
-    <div class="search-container">
-        <input type="text" id="searchBar" placeholder="Search MicrillioPedia...">
-        <button onclick="startSearch()">Search</button>
-    </div>
+    <nav>
+        <h2>Quick Links</h2>
+        <ul>
+            <li><a href="MicrillioPedia/Dirtforms.html">Dirtforms</a></li>
+            <!-- Add more pages here as your wiki grows -->
+        </ul>
+    </nav>
 
-    <main class="content">
+    <section id="search-section">
+        <h2>Search MicrillioPedia</h2>
+        <!-- Search engine functionality is handled in Functions.js -->
+        <input type="text" id="wiki-search" placeholder="Search pages...">
+        <button id="search-btn">Search</button>
+        <div id="search-results"></div>
+    </section>
 
-        <section class="intro">
-            <h2>Welcome to MicrillioPedia</h2>
-            <p>
-                <strong>MicrillioPedia</strong> is the official encyclopedia that documents, organizes, 
-                and gathers information from all Micrillion-related websites.  
-                Whether you’re researching fictional universes, software, tools, or projects 
-                built across the Micrillion Network, MicrillioPedia serves as the central hub 
-                for verified articles and community-driven content.
-            </p>
-        </section>
+    <section id="description">
+        <h2>About MicrillioPedia</h2>
+        <p>
+            MicrillioPedia is a community-driven wiki that collects information, tutorials, and references
+            from all Micrillion-related websites. Explore pages, read articles, and find detailed sources 
+            for all things Micrillion.
+        </p>
+    </section>
 
-        <section class="featured">
-            <h2>Featured Page</h2>
-            <div class="featured-box">
-                <h3><a href="MicrillioPedia/Dirtforms.html">Dirtforms</a></h3>
-                <p>
-                    The Dirtforms are a mysterious and widely-referenced concept within the Micrillion
-                    universe. This page explores their origins, behavior, usage, and appearances across
-                    multiple projects.
-                </p>
-            </div>
-        </section>
-
-        <section class="nav">
-            <h2>Explore MicrillioPedia</h2>
-            <ul>
-                <li><a href="MicrillioPedia/Dirtforms.html">Dirtforms</a></li>
-                <li><a href="#">Micrillion Technologies</a></li>
-                <li><a href="#">Micrillio Systems</a></li>
-                <li><a href="#">Lore & Worldbuilding</a></li>
-                <li><a href="#">Software Projects</a></li>
-                <li><a href="#">Community Pages</a></li>
-            </ul>
-        </section>
-
-    </main>
-
-    <footer class="footer">
-        <p>MicrillioPedia © 2025 — A Micrillion Network Project</p>
+    <footer>
+        <p>&copy; 2025 MicrillioPedia. All rights reserved.</p>
     </footer>
-
-    <!-- JS -->
-    <script src="MicrillioPedia/Functions.js"></script>
 </body>
 </html>
