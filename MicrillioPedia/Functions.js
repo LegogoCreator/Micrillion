@@ -1,51 +1,45 @@
-/* ============================
-   MicrillioPedia Search System
-   ============================ */
+// MicrillioPedia simple search engine
+document.addEventListener("DOMContentLoaded", function() {
+    const searchBtn = document.getElementById("search-btn");
+    const searchInput = document.getElementById("wiki-search");
+    const resultsDiv = document.getElementById("search-results");
 
-/* Database of searchable pages */
-const wikiPages = {
-    "dirtforms": "Dirtforms.html",
-    "example": "Example.html",
-    "example2": "Example2.html"
-};
+    // List of pages in your wiki
+    const pages = [
+        {name: "Dirtforms", path: "MicrillioPedia/Dirtforms.html"},
+        // Add more pages as your wiki grows
+    ];
 
-/* Search function */
-function startSearch() {
-    const input = document.getElementById("searchBar").value.toLowerCase().trim();
+    searchBtn.addEventListener("click", function() {
+        const query = searchInput.value.toLowerCase().trim();
+        resultsDiv.innerHTML = "";
 
-    if (input === "") {
-        alert("Type a page name to search.");
-        return;
-    }
+        if (query === "") {
+            resultsDiv.innerHTML = "<p>Please enter a search term.</p>";
+            return;
+        }
 
-    // Direct match
-    if (wikiPages[input]) {
-        window.location.href = wikiPages[input];
-        return;
-    }
+        const matched = pages.filter(page => page.name.toLowerCase().includes(query));
 
-    // Partial match search
-    const possible = Object.keys(wikiPages).filter(key => key.includes(input));
+        if (matched.length > 0) {
+            matched.forEach(page => {
+                const link = document.createElement("a");
+                link.href = page.path;
+                link.textContent = page.name;
+                link.style.display = "block";
+                link.style.color = "#63b8ff";
+                link.style.marginBottom = "5px";
+                resultsDiv.appendChild(link);
+            });
+        } else {
+            resultsDiv.innerHTML = "<p>No results found.</p>";
+        }
+    });
 
-    if (possible.length === 1) {
-        window.location.href = wikiPages[possible[0]];
-        return;
-    }
-
-    if (possible.length > 1) {
-        alert(
-            "Did you mean:\n• " +
-            possible.join("\n• ")
-        );
-        return;
-    }
-
-    alert("Page not found in MicrillioPedia.");
-}
-
-/* Allow pressing Enter to search */
-document.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-        startSearch();
-    }
+    // Optional: Enter key triggers search
+    searchInput.addEventListener("keypress", function(e) {
+        if (e.key === "Enter") {
+            searchBtn.click();
+        }
+    });
 });
