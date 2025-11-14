@@ -1,0 +1,124 @@
+/* ===========================
+   MicrillioPedia Main Styles
+   =========================== */
+
+/* Import Custom Font */
+@font-face {
+    font-family: "MicrillionFont";
+    src: url("Fonts/FontByLegogoCreator.ttf");
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #12194f;
+    color: white;
+    font-family: "MicrillionFont", sans-serif;
+}
+
+/* ===== Header ===== */
+.header {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.title {
+    font-size: 45px;
+    font-weight: bold;
+}
+
+.subtitle {
+    font-size: 20px;
+    opacity: 0.8;
+}
+
+/* ===== Search Bar ===== */
+.search-container {
+    margin: 20px auto;
+    text-align: center;
+}
+
+#searchBar {
+    width: 60%;
+    max-width: 450px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.search-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    margin-left: 10px;
+    background-color: #2c3bc9;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background-color: #3f52ff;
+}
+
+/* ===== Content ===== */
+.content {
+    width: 90%;
+    max-width: 900px;
+    margin: auto;
+    padding-bottom: 50px;
+}
+
+.intro, .featured, .nav {
+    margin-top: 40px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+/* Featured Box */
+.featured-box {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.featured-box a {
+    color: #7aa9ff;
+    text-decoration: none;
+    font-size: 22px;
+}
+
+.featured-box a:hover {
+    text-decoration: underline;
+}
+
+/* Navigation List */
+.nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.nav li {
+    margin: 8px 0;
+}
+
+.nav a {
+    color: #9fbaff;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.nav a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Footer ===== */
+.footer {
+    text-align: center;
+    opacity: 0.6;
+    margin-top: 40px;
+    padding: 20px;
+    font-size: 14px;
+}
